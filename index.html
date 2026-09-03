@@ -3,363 +3,861 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lộ Trình Học TOEIC 0 - 800+</title>
+    <title>TOEIC 800+ Ultimate Master Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4F46E5;
-            --primary-hover: #4338CA;
-            --bg: #F9FAFB;
-            --card-bg: #FFFFFF;
-            --text: #1F2937;
-            --text-light: #6B7280;
-            --border: #E5E7EB;
+            --bg-body: #0F172A;
+            --bg-card: #1E293B;
+            --bg-card-hover: #334155;
+            --primary: #6366F1;
+            --primary-light: #818CF8;
+            --secondary: #06B6D4;
+            --accent: #F59E0B;
             --success: #10B981;
+            --danger: #EF4444;
+            --text-main: #F8FAFC;
+            --text-sub: #94A3B8;
+            --border: #334155;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            padding: 20px;
-            line-height: 1.5;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            padding: 24px;
+            min-height: 100vh;
         }
 
-        .container {
-            max-width: 1000px;
+        .app-container {
+            max-width: 1400px;
             margin: 0 auto;
         }
 
+        /* Top Bar */
         header {
-            margin-bottom: 24px;
-        }
-
-        h1 {
-            font-size: 24px;
-            color: var(--text);
-            margin-bottom: 8px;
-        }
-
-        /* Stats Dashboard */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            padding: 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        }
-
-        .stat-card h3 {
-            font-size: 13px;
-            color: var(--text-light);
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-
-        .stat-card .number {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            background: var(--card-bg);
-            padding: 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            margin-bottom: 24px;
-        }
-
-        .progress-bar-bg {
-            background: var(--border);
-            height: 12px;
-            border-radius: 6px;
-            overflow: hidden;
-            margin-top: 8px;
-        }
-
-        .progress-bar-fill {
-            background: var(--primary);
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        /* Main Content Grid */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-
-        @media (min-width: 768px) {
-            .main-grid {
-                grid-template-columns: 2fr 1fr;
-            }
-        }
-
-        .section-card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .section-card h2 {
-            font-size: 18px;
-            margin-bottom: 16px;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 8px;
-        }
-
-        /* Checklist Styles */
-        .phase-title {
-            font-weight: bold;
-            color: var(--primary);
-            margin: 16px 0 8px 0;
-            display: block;
-        }
-
-        .task-item {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 8px 0;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
             border-bottom: 1px solid var(--border);
         }
 
-        .task-item:last-child {
-            border-bottom: none;
+        .logo-area h1 {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #818CF8 0%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .task-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin-right: 12px;
-            cursor: pointer;
-            accent-color: var(--primary);
+        .logo-area p {
+            color: var(--text-sub);
+            font-size: 13px;
+            margin-top: 4px;
         }
 
-        .task-item label {
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--primary-light);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: #4F46E5;
+        }
+
+        /* Metric Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .metric-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-sub);
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-size: 28px;
+            font-weight: 800;
+            margin-top: 8px;
+            color: var(--text-main);
+        }
+
+        .metric-sub {
+            font-size: 12px;
+            color: var(--success);
+            margin-top: 4px;
+        }
+
+        /* Layout Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .panel-title {
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Roadmap List Ultra */
+        .roadmap-phase {
+            margin-bottom: 24px;
+        }
+
+        .phase-header {
             font-size: 14px;
+            font-weight: 700;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed var(--border);
         }
 
-        .task-item.completed label {
-            text-decoration: line-through;
-            color: var(--text-light);
+        .week-card {
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
         }
 
-        /* Error Log Form & List */
-        .form-group {
+        .week-card:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-1px);
+        }
+
+        .week-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            border: 2px solid var(--border);
+            appearance: none;
+            outline: none;
+            cursor: pointer;
+            background: transparent;
+            margin-top: 2px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .custom-checkbox:checked {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .custom-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            top: -2px; left: 3px;
+        }
+
+        .week-title {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .week-desc {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-top: 4px;
+        }
+
+        .task-list-inline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .tag {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary-light);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        /* Widgets Right Column */
+        .timer-display {
+            font-size: 36px;
+            font-weight: 800;
+            text-align: center;
+            font-family: monospace;
+            color: var(--accent);
+            margin: 16px 0;
+            background: var(--bg-body);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .timer-controls button { flex: 1; }
+
+        /* Calculator Widget */
+        .calc-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
             margin-bottom: 12px;
         }
 
-        .form-group label {
+        .input-group label {
             display: block;
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 11px;
+            color: var(--text-sub);
             margin-bottom: 4px;
         }
 
-        .form-group input, .form-group textarea {
+        .input-group input {
             width: 100%;
-            padding: 8px;
+            background: var(--bg-body);
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 6px;
+            padding: 8px;
+            color: var(--text-main);
             font-size: 14px;
         }
 
-        button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            width: 100%;
+        .score-result {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
         }
 
-        button:hover {
-            background: var(--primary-hover);
+        .score-result-val {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--success);
         }
 
-        .log-item {
-            background: var(--bg);
-            padding: 10px;
-            border-radius: 4px;
-            margin-top: 8px;
+        /* Error Log Table */
+        .log-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .log-form input, .log-form textarea {
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 12px;
+            color: var(--text-main);
             font-size: 13px;
-            border-left: 3px solid var(--primary);
         }
 
-        .log-item strong {
-            color: var(--primary);
+        .log-list {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .log-item-card {
+            background: var(--bg-body);
+            border-left: 3px solid var(--primary);
+            padding: 10px 12px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .log-item-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin-bottom: 4px;
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.4s ease;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="app-container">
+    <!-- Header -->
     <header>
-        <h1> Dashboard Theo Dõi Học TOEIC 0 - 800+</h1>
-        <p style="color: var(--text-light); font-size: 14px;">Lộ trình 30 tuần tự học kỷ luật và hiệu quả.</p>
+        <div class="logo-area">
+            <h1>TOEIC 800+ Master Dashboard</h1>
+            <p>Lộ trình thực chiến 30 tuần - Tự học kỷ luật & Tối ưu hóa điểm số</p>
+        </div>
+        <div class="header-actions">
+            <button class="btn" onclick="exportData()"> Export Data</button>
+            <button class="btn" onclick="document.getElementById('importFile').click()"> Import</button>
+            <input type="file" id="importFile" style="display:none" onchange="importData(event)">
+            <button class="btn btn-primary" onclick="resetAll()"> Reset</button>
+        </div>
     </header>
 
-    <div class="stats-grid">
-        <div class="stat-card">
-            <h3>Mục tiêu</h3>
-            <div class="number">800+ TOEIC</div>
+    <!-- Metrics Overview -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-label">Mục tiêu</div>
+            <div class="metric-value">800+</div>
+            <div class="metric-sub">Target Score</div>
         </div>
-        <div class="stat-card">
-            <h3>Thời gian dự kiến</h3>
-            <div class="number">30 Tuần</div>
+        <div class="metric-card">
+            <div class="metric-label">Tiến độ tổng</div>
+            <div class="metric-value" id="overall-percent">0%</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="overall-bar"></div>
+            </div>
         </div>
-        <div class="stat-card">
-            <h3>Đã hoàn thành</h3>
-            <div class="number" id="completed-count">0 / 30 Tuần</div>
+        <div class="metric-card">
+            <div class="metric-label">Đã hoàn thành</div>
+            <div class="metric-value" id="weeks-completed">0/30</div>
+            <div class="metric-sub">Tuần học</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Error Log</div>
+            <div class="metric-value" id="logs-count">0</div>
+            <div class="metric-sub">Lỗi đã ghi chép</div>
         </div>
     </div>
 
-    <div class="progress-container">
-        <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 600;">
-            <span>Tiến độ tổng thể</span>
-            <span id="progress-percent">0%</span>
-        </div>
-        <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="progress-fill"></div>
-        </div>
-    </div>
+    <!-- Main Dashboard Body -->
+    <div class="dashboard-grid">
+        <!-- Left Col: Detailed Roadmap -->
+        <div class="main-content">
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                         Chi Tiết Lộ Trình 30 Tuần
+                    </div>
+                </div>
 
-    <div class="main-grid">
-        <div class="section-card">
-            <h2>Lộ Trình Học Chi Tiết</h2>
+                <!-- Phase 1 -->
+                <div class="roadmap-phase">
+                    <div class="phase-header">Giai đoạn 1: Xây Nền Cơ Bản (Target 350 - 450)</div>
+                    
+                    <div class="week-card">
+                        <div class="week-top">
+                            <input type="checkbox" class="custom-checkbox" id="chk_w1_2" onchange="calcProgress()">
+                            <div>
+                                <div class="week-title">Tuần 1 - 2: Chuẩn hóa Phát âm IPA & Từ loại cốt lõi</div>
+                                <div class="week-desc">Master 44 âm IPA (2 âm/ngày) + Phân biệt Noun, Pronoun, Adj, Adv. Học 20 từ vựng/ngày.</div>
+                                <div class="task-list-inline">
+                                    <span class="tag">BBC IPA</span>
+                                    <span class="tag">Grammar in Use Ch.1-4</span>
+                                    <span class="tag">280 Từ vựng</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="week-card">
+                        <div class="week-top">
+                            <input type="checkbox" class="custom-checkbox" id="chk_w3_4" onchange="calcProgress()">
+                            <div>
+                                <div class="week-title">Tuần 3 - 4: 6 Thì cốt lõi & Luyện Nghe chép chính tả câu ngắn</div>
+                                <div class="week-desc">Hiện tại đơn/tiếp diễn, Quá khứ đơn, Hiện tại hoàn thành, Tương lai đơn. Nghe chép chính tả câu 3-5 từ.</div>
+                                <div class="task-list-inline">
+                                    <span class="tag">6 Thì chính</span>
+                                    <span class="tag">Dictation VOA</span>
+                                    <span class="tag">Part 1 Intro</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="week-card">
+                        <div class="week-top">
+                            <input type="checkbox" class="custom-checkbox" id="chk_w5_6" onchange="calcProgress()">
+                            <div>
+                                <div class="week-title">Tuần 5 - 6: Câu Bị động & Giới từ thời gian/nơi chốn</div>
+                                <div class="week-desc">Cấu trúc Passive Voice toàn bộ các thì. Nắm vững In/On/At/For/During/Within. Nghe câu hỏi Wh-questions.</div>
+                                <div class="task-list-inline">
+                                    <span class="tag">Passive Voice</span>
+                                    <span class="tag">Prepositions</span>
+                                    <span class="tag">Part 2 Wh-questions</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="week-card">
+                        <div class="week-top">
+                            <input type="checkbox" class="custom-checkbox" id="chk_w7_8" onchange="calcProgress()">
+                            <div>
+                                <div class="week-title">Tuần 7 - 8: Câu So sánh, Liên từ & Thi đánh giá Lần 1</div>
+                                <div class="week-desc">So sánh bằng/hơn/nhất, Liên từ (And, But, Although, Because). Thi thử đề Very Easy TOEIC (Mục tiêu 400+).</div>
+                                <div class="task-list-inline">
+                                    <span class="tag">Comparisons</span>
+                                    <span class="tag">Conjunctions</span>
+                                    <span class="tag"> Mini Mock Test 1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="roadmap-phase">
+                    <div class="phase-header">Giai đoạn 2: Chiến Thuật Từng Part (Target 500 - 650)</div>
+                    
+                    <div class="week-card">
+                        <div class="week-top">
+                            <input type="checkbox" class="custom-checkbox" id="chk_w9_10" onchange="calcProgress()">
+                            <div>
+                                <div class="week-title">Tuần 9 - 10: Part 1 (Hình ảnh) & Part 5 (Từ loại 15s)</div>
+                                <div class="week-desc">Thuộc 100 động từ Part 1 hay gặp. Phương pháp loại trừ bẫy Being+V3. Giải nhanh Part 5 về từ loại trong 15s/câu.</div>
+                                <div class="task-list-inline">
+                                    <span class="tag">600 Essential Words</span>
+                                    <span class="tag">Part 1 Verbs</span>
+                                    <span class="tag">Part 5 Fast Trick</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="week-card">
+                        <div class="week-top">
+                            <input type="checkbox" class="custom-checkbox" id="chk_w11_12" onchange="calcProgress()">
+                            <div>
+                                <div class="week-title">Tuần 11 - 12: Part 2 (Hỏi-Đáp) & Part 5 (Liên từ/Giới từ)</div>
+                                <div class="week-desc">Luyện bắt Keyword đầu câu hỏi. Bẫy đồng âm (Same-sound). Phân biệt Giới từ (đi với Noun) vs Liên từ (đi với Clause).</div>
+                                <div class="task-list-inline">
+                                    <span class="tag">Part 2 Tactics</span>
+                                    <span class="tag">Avoid Same-Sound</span>
+                                    <span class="tag">Grammar Advanced</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="week-card">
+                        <div class="week-top">
+                            <input type="checkbox" class="custom-checkbox" id="chk_w13_15" onchange="calcProgress()">
+                            <div>
+                                <div class="week-title">Tuần 13 - 15: Part 3 (Hội thoại) & Part 6 (Điền đoạn văn)</div>
+                                <div class="week-desc">Kỹ năng đọc trước 3 câu hỏi trước khi nghe. Điền câu vào khoảng trống Part 6 dựa vào ngữ cảnh liền trước/sau.</div>
+                                <div class="task-list-inline">
+                                    <span class="tag">Part 3 Skimming</span>
+                                    <span class="tag">Part 6 Context</span>
+                                    <span class="tag">ETS Listening</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="week-card">
+                        <div class="week-top">
+                            <input type="checkbox" class="custom-checkbox" id="chk_w16_18" onchange="calcProgress()">
+                            <div>
+                                <div class="week-title">Tuần 16 - 18: Part 4 (Bài nói) & Part 7 (Đoạn đơn)</div>
+                                <div class="week-desc">Nhận diện cấu trúc Broadcast/Announcement/Voice message. Kỹ năng Scanning tìm thông tin nhanh ở Part 7 Đoạn đơn.</div>
+                                <div class="task-list-inline">
+                                    <span class="tag">Part 4 Speeches</span>
+                                    <span class="tag">Part 7 Single Passage</span>
+                                    <span class="tag">Scanning Method</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="week-card">
+                        <div class="week-top">
+                            <input type="checkbox" class="custom-checkbox" id="chk_w19_20" onchange="calcProgress()">
+                            <div>
+                                <div class="week-title">Tuần 19 - 20: Part 7 (Đoạn đôi/ba) & Thi đánh giá Lần 2</div>
+                                <div class="week-desc">Phương pháp Cross-reference (kết nối 2-3 đoạn để trả lời câu hỏi phức tạp). Thi thử ETS Test 1 (Mục tiêu 600+).</div>
+                                <div class="task-list-inline">
+                                    <span class="tag">Part 7 Multi-Passage</span>
+                                    <span class="tag">Cross-Reference</span>
+                                    <span class="tag"> Full Mock Test 2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="roadmap-phase">
+                    <div class="phase-header">Giai đoạn 3: Thực Chiến Luyện Đề & Sửa Lỗi Triệt Để (Target 750 - 800+)</div>
+                    
+                    <div class="week-card">
+                        <div class="week-top">
+                            <input type="checkbox" class="custom-checkbox" id="chk_w21_24" onchange="calcProgress()">
+                            <div>
+                                <div class="week-title">Tuần 21 - 24: Cày Bộ ETS (2 Đề/Tuần + Chữa đề sâu)</div>
+                                <div class="week-desc">Giải đề áp lực 120 phút. Chữa đề 100%: Nghe lại không xem Transcript $\rightarrow$ Đọc Script tra từ mới $\rightarrow$ Phân tích bẫy sai.</div>
+                                <div class="task-list-inline">
+                                    <span class="tag">ETS 2023/2024</span>
+                                    <span class="tag">Deep Correction</span>
+                                    <span class="tag">Error Logging</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="week-card">
+                        <div class="week-top">
+                            <input type="checkbox" class="custom-checkbox" id="chk_w25_28" onchange="calcProgress()">
+                            <div>
+                                <div class="week-title">Tuần 25 - 28: Tối ưu Thời Gian Part 7 & Hacker TOEIC Challenge</div>
+                                <div class="week-desc">Khóa chặt thời gian: Part 5+6 (15-18 phút), Part 7 Đoạn đơn (25 phút), Đoạn đôi/ba (30 phút). Làm câu nâng cao từ Hacker Vol 3.</div>
+                                <div class="task-list-inline">
+                                    <span class="tag">Strict Time Management</span>
+                                    <span class="tag">Hacker TOEIC</span>
+                                    <span class="tag">Target 800+ Speed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="week-card">
+                        <div class="week-top">
+                            <input type="checkbox" class="custom-checkbox" id="chk_w29_30" onchange="calcProgress()">
+                            <div>
+                                <div class="week-title">Tuần 29 - 30: Rà soát Error Log & Thi thật</div>
+                                <div class="week-desc">Đọc lại toàn bộ Sổ tay lỗi sai. Thi thử 2 đề cuối giữ phong độ. Chuẩn bị tâm lý thi chính thức.</div>
+                                <div class="task-list-inline">
+                                    <span class="tag">Error Log Review</span>
+                                    <span class="tag">Final Test</span>
+                                    <span class="tag"> Ready to Exam</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Right Col: Widgets & Tools -->
+        <div class="sidebar">
             
-            <span class="phase-title">Giai đoạn 1: Xây nền cơ bản (Target 350 - 450)</span>
-            <div class="task-item"><input type="checkbox" id="w1" onchange="updateProgress()"><label for="w1">Tuần 1-2: Bảng phát âm IPA & Từ loại cơ bản</label></div>
-            <div class="task-item"><input type="checkbox" id="w2" onchange="updateProgress()"><label for="w2">Tuần 3-4: 6 Thì cốt lõi trong TOEIC</label></div>
-            <div class="task-item"><input type="checkbox" id="w3" onchange="updateProgress()"><label for="w3">Tuần 5-6: Câu bị động & Giới từ</label></div>
-            <div class="task-item"><input type="checkbox" id="w4" onchange="updateProgress()"><label for="w4">Tuần 7-8: Câu so sánh, Liên từ & Thi thử Lần 1</label></div>
-
-            <span class="phase-title">Giai đoạn 2: Kỹ năng làm bài từng Part (Target 500 - 650)</span>
-            <div class="task-item"><input type="checkbox" id="w5" onchange="updateProgress()"><label for="w5">Tuần 9-10: Part 1 (Hình ảnh) & Part 5 (Từ loại)</label></div>
-            <div class="task-item"><input type="checkbox" id="w6" onchange="updateProgress()"><label for="w6">Tuần 11-12: Part 2 (Hỏi - Đáp) & Part 5 (Từ vựng)</label></div>
-            <div class="task-item"><input type="checkbox" id="w7" onchange="updateProgress()"><label for="w7">Tuần 13-15: Part 3 (Hội thoại) & Part 6 (Điền đoạn)</label></div>
-            <div class="task-item"><input type="checkbox" id="w8" onchange="updateProgress()"><label for="w8">Tuần 16-18: Part 4 (Bài nói) & Part 7 (Đoạn đơn)</label></div>
-            <div class="task-item"><input type="checkbox" id="w9" onchange="updateProgress()"><label for="w9">Tuần 19-20: Part 7 (Đoạn đôi/ba) & Thi thử Lần 2</label></div>
-
-            <span class="phase-title">Giai đoạn 3: Thực chiến luyện đề (Target 750 - 800+)</span>
-            <div class="task-item"><input type="checkbox" id="w10" onchange="updateProgress()"><label for="w10">Tuần 21-22: Giải đề ETS - Tối ưu Part 1, 2, 5</label></div>
-            <div class="task-item"><input type="checkbox" id="w11" onchange="updateProgress()"><label for="w11">Tuần 23-24: Giải đề ETS - Tối ưu Part 3, 4, 6</label></div>
-            <div class="task-item"><input type="checkbox" id="w12" onchange="updateProgress()"><label for="w12">Tuần 25-28: Luyện chiến thuật thời gian Part 7</label></div>
-            <div class="task-item"><input type="checkbox" id="w13" onchange="updateProgress()"><label for="w13">Tuần 29-30: Tổng ôn Sổ tay lỗi sai & Thi thật</label></div>
-        </div>
-
-        <div class="section-card">
-            <h2>Ghi Chép Lỗi Sai (Error Log)</h2>
-            <form id="error-form" onsubmit="addErrorLog(event)">
-                <div class="form-group">
-                    <label>Câu hỏi / Part</label>
-                    <input type="text" id="log-part" placeholder="VD: Part 5 - Câu 104" required>
+            <!-- Widget 1: Practice Timer -->
+            <div class="panel">
+                <div class="panel-title"> Đồng Hồ Bấm Giờ Thi Thử</div>
+                <div class="timer-display" id="timer-display">02:00:00</div>
+                <div class="timer-controls">
+                    <button class="btn btn-primary" onclick="startTimer()">Start</button>
+                    <button class="btn" onclick="pauseTimer()">Pause</button>
+                    <button class="btn" onclick="resetTimer()">Reset</button>
                 </div>
-                <div class="form-group">
-                    <label>Lỗi sai & Bài học</label>
-                    <textarea id="log-note" rows="3" placeholder="VD: Nhầm giữa Adj và Adv. Sau remain dùng Adj." required></textarea>
-                </div>
-                <button type="submit">Lưu Lỗi Sai</button>
-            </form>
+            </div>
 
-            <div id="log-container" style="margin-top: 16px;">
+            <!-- Widget 2: Estimated Score Calculator -->
+            <div class="panel">
+                <div class="panel-title"> Ước Tính Điểm Thi</div>
+                <div class="calc-inputs" style="margin-top: 12px;">
+                    <div class="input-group">
+                        <label>Số câu Listening (/100)</label>
+                        <input type="number" id="calc-lc" value="75" max="100" min="0" oninput="calcScore()">
+                    </div>
+                    <div class="input-group">
+                        <label>Số câu Reading (/100)</label>
+                        <input type="number" id="calc-rc" value="70" max="100" min="0" oninput="calcScore()">
+                    </div>
                 </div>
+                <div class="score-result">
+                    <div style="font-size: 11px; color: var(--text-sub);">DỰ ĐOÁN TỔNG ĐIỂM</div>
+                    <div class="score-result-val" id="total-score-val">740 TOEIC</div>
+                </div>
+            </div>
+
+            <!-- Widget 3: Error Log Manager -->
+            <div class="panel">
+                <div class="panel-title"> Sổ Tay Lỗi Sai (Error Log)</div>
+                <form class="log-form" onsubmit="saveLog(event)" style="margin-top: 12px;">
+                    <input type="text" id="log-title" placeholder="VD: Part 5 - Câu 112 (Liên từ)" required>
+                    <textarea id="log-detail" rows="2" placeholder="VD: Sai do nhầm 'Although' + S+V với 'Despite' + Noun. Ngữ cảnh cần cụm danh từ." required></textarea>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Lưu Lỗi Sai</button>
+                </form>
+
+                <div class="log-list" id="log-list">
+                    <!-- Logs injection -->
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
 
 <script>
-    // Hàm cập nhật tiến độ
-    function updateProgress() {
-        const checkboxes = document.querySelectorAll('.task-item input[type="checkbox"]');
-        const total = checkboxes.length;
-        let checkedCount = 0;
+    // System State Management
+    let timerInterval = null;
+    let timerSeconds = 7200; // 2 hours
 
-        checkboxes.forEach((cb) => {
-            const parent = cb.parentElement;
-            if (cb.checked) {
-                checkedCount++;
-                parent.classList.add('completed');
-            } else {
-                parent.classList.remove('completed');
-            }
-            // Lưu trạng thái checkbox vào localStorage
+    function calcProgress() {
+        const checkboxes = document.querySelectorAll('.custom-checkbox');
+        let checked = 0;
+        checkboxes.forEach(cb => {
+            if (cb.checked) checked++;
             localStorage.setItem(cb.id, cb.checked);
         });
 
-        const percent = Math.round((checkedCount / total) * 100);
-        document.getElementById('progress-percent').innerText = percent + '%';
-        document.getElementById('progress-fill').style.width = percent + '%';
-        document.getElementById('completed-count').innerText = `${checkedCount} / ${total} Mục`;
+        const percent = Math.round((checked / checkboxes.length) * 100);
+        document.getElementById('overall-percent').innerText = percent + '%';
+        document.getElementById('overall-bar').style.width = percent + '%';
+        document.getElementById('weeks-completed').innerText = `${checked}/${checkboxes.length}`;
     }
 
-    // Hàm thêm lỗi sai
-    function addErrorLog(event) {
-        event.preventDefault();
-        const part = document.getElementById('log-part').value;
-        const note = document.getElementById('log-note').value;
+    // Timer Logic
+    function updateTimerDisplay() {
+        const h = String(Math.floor(timerSeconds / 3600)).padStart(2, '0');
+        const m = String(Math.floor((timerSeconds % 3600) / 60)).padStart(2, '0');
+        const s = String(timerSeconds % 60).padStart(2, '0');
+        document.getElementById('timer-display').innerText = `${h}:${m}:${s}`;
+    }
 
-        const logs = JSON.parse(localStorage.getItem('toeic_error_logs') || '[]');
-        logs.push({ part, note });
-        localStorage.setItem('toeic_error_logs', JSON.stringify(logs));
+    function startTimer() {
+        if (timerInterval) return;
+        timerInterval = setInterval(() => {
+            if (timerSeconds > 0) {
+                timerSeconds--;
+                updateTimerDisplay();
+            } else {
+                clearInterval(timerInterval);
+                alert(' Hết giờ làm bài!');
+            }
+        }, 1000);
+    }
 
-        document.getElementById('log-part').value = '';
-        document.getElementById('log-note').value = '';
+    function pauseTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+
+    function resetTimer() {
+        pauseTimer();
+        timerSeconds = 7200;
+        updateTimerDisplay();
+    }
+
+    // Score Calculator Formula Approx
+    function calcScore() {
+        const lcRaw = parseInt(document.getElementById('calc-lc').value) || 0;
+        const rcRaw = parseInt(document.getElementById('calc-rc').value) || 0;
+
+        // Approx ETS scale conversion
+        let lcScore = Math.min(495, Math.max(5, lcRaw * 4.95));
+        let rcScore = Math.min(495, Math.max(5, rcRaw * 4.75));
+
+        const total = Math.round((lcScore + rcScore) / 5) * 5; // Round to nearest 5
+        document.getElementById('total-score-val').innerText = `${total} TOEIC`;
+    }
+
+    // Error Log Management
+    function saveLog(e) {
+        e.preventDefault();
+        const title = document.getElementById('log-title').value;
+        const detail = document.getElementById('log-detail').value;
+
+        const logs = JSON.parse(localStorage.getItem('toeic_v2_logs') || '[]');
+        logs.push({ id: Date.now(), title, detail });
+        localStorage.setItem('toeic_v2_logs', JSON.stringify(logs));
+
+        document.getElementById('log-title').value = '';
+        document.getElementById('log-detail').value = '';
         renderLogs();
     }
 
-    // Hàm hiển thị danh sách lỗi sai
-    function renderLogs() {
-        const container = document.getElementById('log-container');
-        const logs = JSON.parse(localStorage.getItem('toeic_error_logs') || '[]');
-        container.innerHTML = '';
+    function deleteLog(id) {
+        let logs = JSON.parse(localStorage.getItem('toeic_v2_logs') || '[]');
+        logs = logs.filter(l => l.id !== id);
+        localStorage.setItem('toeic_v2_logs', JSON.stringify(logs));
+        renderLogs();
+    }
 
-        logs.reverse().forEach((item) => {
-            const div = document.createElement('div');
-            div.className = 'log-item';
-            div.innerHTML = `<strong>${escapeHtml(item.part)}</strong>: ${escapeHtml(item.note)}`;
-            container.appendChild(div);
+    function renderLogs() {
+        const container = document.getElementById('log-list');
+        const logs = JSON.parse(localStorage.getItem('toeic_v2_logs') || '[]');
+        document.getElementById('logs-count').innerText = logs.length;
+        
+        container.innerHTML = '';
+        logs.reverse().forEach(log => {
+            const card = document.createElement('div');
+            card.className = 'log-item-card';
+            card.innerHTML = `
+                <div class="log-item-header">
+                    <span>${escapeHtml(log.title)}</span>
+                    <span style="color: var(--danger); cursor: pointer;" onclick="deleteLog(${log.id})">✕</span>
+                </div>
+                <div style="color: var(--text-sub);">${escapeHtml(log.detail)}</div>
+            `;
+            container.appendChild(card);
         });
     }
 
-    // Tránh lỗi XSS cơ bản
-    function escapeHtml(text) {
-        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    function escapeHtml(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
 
-    // Khởi tạo trạng thái khi tải lại trang
+    // Backup & Restore
+    function exportData() {
+        const data = {
+            checkboxes: {},
+            logs: localStorage.getItem('toeic_v2_logs')
+        };
+        document.querySelectorAll('.custom-checkbox').forEach(cb => {
+            data.checkboxes[cb.id] = cb.checked;
+        });
+        const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `TOEIC_Dashboard_Backup_${new Date().toISOString().slice(0,10)}.json`;
+        a.click();
+    }
+
+    function importData(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            try {
+                const data = JSON.parse(event.target.result);
+                if (data.checkboxes) {
+                    Object.keys(data.checkboxes).forEach(id => {
+                        localStorage.setItem(id, data.checkboxes[id]);
+                    });
+                }
+                if (data.logs) {
+                    localStorage.setItem('toeic_v2_logs', data.logs);
+                }
+                location.reload();
+            } catch (err) {
+                alert('File không hợp lệ!');
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    function resetAll() {
+        if (confirm('Bạn có chắc muốn xóa toàn bộ tiến độ và ghi chép?')) {
+            localStorage.clear();
+            location.reload();
+        }
+    }
+
+    // Init App
     window.onload = function() {
-        const checkboxes = document.querySelectorAll('.task-item input[type="checkbox"]');
-        checkboxes.forEach((cb) => {
-            const savedState = localStorage.getItem(cb.id);
-            if (savedState === 'true') {
+        document.querySelectorAll('.custom-checkbox').forEach(cb => {
+            if (localStorage.getItem(cb.id) === 'true') {
                 cb.checked = true;
             }
         });
-        updateProgress();
+        calcProgress();
+        calcScore();
         renderLogs();
     };
 </script>
-
 </body>
 </html>
