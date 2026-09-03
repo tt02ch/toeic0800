@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOEIC 800+ Master Dashboard (Real Links VN)</title>
+    <title>TOEIC 800+ Master Dashboard (Lịch Học Chi Tiết Từng Ngày)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -180,7 +180,7 @@
             gap: 8px;
         }
 
-        /* Roadmap List Ultra */
+        /* Roadmap List */
         .roadmap-phase {
             margin-bottom: 24px;
         }
@@ -322,7 +322,7 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             width: 90%;
-            max-width: 720px;
+            max-width: 800px;
             max-height: 85vh;
             overflow-y: auto;
             padding: 28px;
@@ -360,57 +360,60 @@
 
         .modal-close:hover { color: var(--text-main); }
 
-        .resource-section {
-            margin-bottom: 20px;
-        }
-
-        .resource-section h4 {
-            font-size: 13px;
-            color: var(--primary-light);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 10px;
-        }
-
-        .resource-list {
-            list-style: none;
-        }
-
-        .resource-item {
+        /* Day Card Layout inside Modal */
+        .day-card {
             background: var(--bg-body);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px 14px;
-            margin-bottom: 8px;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .day-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 12px;
+            margin-bottom: 8px;
         }
 
-        .resource-info h5 {
+        .day-title {
             font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .day-task-desc {
+            font-size: 13px;
             color: var(--text-main);
+            line-height: 1.6;
+            margin-bottom: 10px;
         }
 
-        .resource-info p {
-            font-size: 12px;
-            color: var(--text-sub);
-            margin-top: 2px;
+        .day-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
-        .resource-link {
-            background: var(--primary);
-            color: white;
-            padding: 6px 14px;
+        .day-link-btn {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary-light);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 4px 10px;
             border-radius: 6px;
             font-size: 12px;
             text-decoration: none;
             font-weight: 600;
-            white-space: nowrap;
+            transition: all 0.2s ease;
         }
 
-        .resource-link:hover { background: #4F46E5; }
+        .day-link-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
 
         /* Timer & Calc Widgets */
         .timer-display {
@@ -467,7 +470,7 @@
     <header>
         <div class="logo-area">
             <h1>TOEIC 800+ Master Dashboard</h1>
-            <p>Lộ trình 30 tuần - Nhấp vào từng tuần để lấy link tài liệu chuẩn 100% cho người Việt</p>
+            <p>Nhấp vào bất kỳ tuần nào để xem Lịch Học Chi Tiết Từ Thứ 2 đến Chủ Nhật</p>
         </div>
         <div class="header-actions">
             <button class="btn" onclick="exportData()"> Export Data</button>
@@ -510,7 +513,7 @@
             <div class="panel">
                 <div class="panel-header">
                     <div class="panel-title">
-                         Chi Tiết Lộ Trình (Click để mở Link Tài Liệu)
+                         Chi Tiết Lộ Trình (Click để xem Nhiệm Vụ Hàng Ngày)
                     </div>
                 </div>
 
@@ -524,7 +527,7 @@
                             <div class="week-content">
                                 <div class="week-title-row">
                                     <div class="week-title">Tuần 1 - 2: Chuẩn hóa Phát âm IPA & Từ loại cốt lõi</div>
-                                    <span class="resource-badge">📂 Resources (4)</span>
+                                    <span class="resource-badge">📅 Xem lịch 7 ngày</span>
                                 </div>
                                 <div class="week-desc">Master 44 âm IPA (2 âm/ngày) + Phân biệt Noun, Pronoun, Adj, Adv. Học 20 từ vựng/ngày.</div>
                                 <div class="task-list-inline">
@@ -542,7 +545,7 @@
                             <div class="week-content">
                                 <div class="week-title-row">
                                     <div class="week-title">Tuần 3 - 4: 6 Thì cốt lõi & Luyện Nghe chép chính tả câu ngắn</div>
-                                    <span class="resource-badge">📂 Resources (3)</span>
+                                    <span class="resource-badge">📅 Xem lịch 7 ngày</span>
                                 </div>
                                 <div class="week-desc">Hiện tại đơn/tiếp diễn, Quá khứ đơn, Hiện tại hoàn thành, Tương lai đơn. Nghe chép chính tả câu 3-5 từ.</div>
                                 <div class="task-list-inline">
@@ -560,7 +563,7 @@
                             <div class="week-content">
                                 <div class="week-title-row">
                                     <div class="week-title">Tuần 5 - 6: Câu Bị động & Giới từ thời gian/nơi chốn</div>
-                                    <span class="resource-badge">📂 Resources (3)</span>
+                                    <span class="resource-badge">📅 Xem lịch 7 ngày</span>
                                 </div>
                                 <div class="week-desc">Cấu trúc Passive Voice toàn bộ các thì. Nắm vững In/On/At/For/During/Within. Nghe câu hỏi Wh-questions.</div>
                                 <div class="task-list-inline">
@@ -578,7 +581,7 @@
                             <div class="week-content">
                                 <div class="week-title-row">
                                     <div class="week-title">Tuần 7 - 8: Câu So sánh, Liên từ & Thi đánh giá Lần 1</div>
-                                    <span class="resource-badge">📂 Resources (3)</span>
+                                    <span class="resource-badge">📅 Xem lịch 7 ngày</span>
                                 </div>
                                 <div class="week-desc">So sánh bằng/hơn/nhất, Liên từ (And, But, Although, Because). Thi thử đề Very Easy TOEIC (Mục tiêu 400+).</div>
                                 <div class="task-list-inline">
@@ -601,7 +604,7 @@
                             <div class="week-content">
                                 <div class="week-title-row">
                                     <div class="week-title">Tuần 9 - 10: Part 1 (Hình ảnh) & Part 5 (Từ loại 15s)</div>
-                                    <span class="resource-badge">📂 Resources (3)</span>
+                                    <span class="resource-badge">📅 Xem lịch 7 ngày</span>
                                 </div>
                                 <div class="week-desc">Thuộc 100 động từ Part 1 hay gặp. Phương pháp loại trừ bẫy Being+V3. Giải nhanh Part 5 về từ loại trong 15s/câu.</div>
                                 <div class="task-list-inline">
@@ -619,7 +622,7 @@
                             <div class="week-content">
                                 <div class="week-title-row">
                                     <div class="week-title">Tuần 11 - 12: Part 2 (Hỏi-Đáp) & Part 5 (Liên từ/Giới từ)</div>
-                                    <span class="resource-badge">📂 Resources (3)</span>
+                                    <span class="resource-badge">📅 Xem lịch 7 ngày</span>
                                 </div>
                                 <div class="week-desc">Luyện bắt Keyword đầu câu hỏi. Bẫy đồng âm (Same-sound). Phân biệt Giới từ (đi với Noun) vs Liên từ (đi với Clause).</div>
                                 <div class="task-list-inline">
@@ -637,7 +640,7 @@
                             <div class="week-content">
                                 <div class="week-title-row">
                                     <div class="week-title">Tuần 13 - 15: Part 3 (Hội thoại) & Part 6 (Điền đoạn văn)</div>
-                                    <span class="resource-badge">📂 Resources (3)</span>
+                                    <span class="resource-badge">📅 Xem lịch 7 ngày</span>
                                 </div>
                                 <div class="week-desc">Kỹ năng đọc trước 3 câu hỏi trước khi nghe. Điền câu vào khoảng trống Part 6 dựa vào ngữ cảnh liền trước/sau.</div>
                                 <div class="task-list-inline">
@@ -655,7 +658,7 @@
                             <div class="week-content">
                                 <div class="week-title-row">
                                     <div class="week-title">Tuần 16 - 18: Part 4 (Bài nói) & Part 7 (Đoạn đơn)</div>
-                                    <span class="resource-badge">📂 Resources (3)</span>
+                                    <span class="resource-badge">📅 Xem lịch 7 ngày</span>
                                 </div>
                                 <div class="week-desc">Nhận diện cấu trúc Broadcast/Announcement/Voice message. Kỹ năng Scanning tìm thông tin nhanh ở Part 7 Đoạn đơn.</div>
                                 <div class="task-list-inline">
@@ -673,7 +676,7 @@
                             <div class="week-content">
                                 <div class="week-title-row">
                                     <div class="week-title">Tuần 19 - 20: Part 7 (Đoạn đôi/ba) & Thi đánh giá Lần 2</div>
-                                    <span class="resource-badge">📂 Resources (3)</span>
+                                    <span class="resource-badge">📅 Xem lịch 7 ngày</span>
                                 </div>
                                 <div class="week-desc">Phương pháp Cross-reference (kết nối 2-3 đoạn để trả lời câu hỏi phức tạp). Thi thử ETS Test 1 (Mục tiêu 600+).</div>
                                 <div class="task-list-inline">
@@ -696,7 +699,7 @@
                             <div class="week-content">
                                 <div class="week-title-row">
                                     <div class="week-title">Tuần 21 - 24: Cày Bộ ETS (2 Đề/Tuần + Chữa đề sâu)</div>
-                                    <span class="resource-badge">📂 Resources (3)</span>
+                                    <span class="resource-badge">📅 Xem lịch 7 ngày</span>
                                 </div>
                                 <div class="week-desc">Giải đề áp lực 120 phút. Chữa đề 100%: Nghe lại không xem Transcript $\rightarrow$ Đọc Script tra từ mới $\rightarrow$ Phân tích bẫy sai.</div>
                                 <div class="task-list-inline">
@@ -714,7 +717,7 @@
                             <div class="week-content">
                                 <div class="week-title-row">
                                     <div class="week-title">Tuần 25 - 28: Tối ưu Thời Gian Part 7 & Hacker TOEIC Challenge</div>
-                                    <span class="resource-badge">📂 Resources (3)</span>
+                                    <span class="resource-badge">📅 Xem lịch 7 ngày</span>
                                 </div>
                                 <div class="week-desc">Khóa chặt thời gian: Part 5+6 (15-18 phút), Part 7 Đoạn đơn (25 phút), Đoạn đôi/ba (30 phút). Làm câu nâng cao từ Hacker Vol 3.</div>
                                 <div class="task-list-inline">
@@ -732,7 +735,7 @@
                             <div class="week-content">
                                 <div class="week-title-row">
                                     <div class="week-title">Tuần 29 - 30: Rà soát Error Log & Thi thật</div>
-                                    <span class="resource-badge">📂 Resources (3)</span>
+                                    <span class="resource-badge">📅 Xem lịch 7 ngày</span>
                                 </div>
                                 <div class="week-desc">Đọc lại toàn bộ Sổ tay lỗi sai. Thi thử 2 đề cuối giữ phong độ. Chuẩn bị tâm lý thi chính thức.</div>
                                 <div class="task-list-inline">
@@ -804,220 +807,194 @@
     <div class="modal-container" onclick="event.stopPropagation()">
         <div class="modal-header">
             <div>
-                <h2 id="modalTitle">Tài Liệu Hướng Dẫn</h2>
-                <p id="modalSub" style="font-size: 13px; color: var(--text-sub); margin-top: 4px;">Link thật 100% chọn lọc cho từng giai đoạn</p>
+                <h2 id="modalTitle">Lịch Học Chi Tiết Từng Ngày</h2>
+                <p id="modalSub" style="font-size: 13px; color: var(--text-sub); margin-top: 4px;">Thực hiện đầy đủ nhiệm vụ mỗi ngày để đạt hiệu quả cao nhất</p>
             </div>
             <button class="modal-close" onclick="closeResourceModal(null)">✕</button>
         </div>
         <div id="modalBody">
-            <!-- Dynamic Content Injected Here -->
+            <!-- Dynamic Daily Content Injected Here -->
         </div>
     </div>
 </div>
 
 <script>
-    // Real Resource Database (Exact Working URLs)
-    const resourceDB = {
+    // Detailed Daily Schedule Database
+    const dailyScheduleDB = {
         'w1_2': {
             title: 'Tuần 1 - 2: Chuẩn Hóa IPA & Từ Loại Căn Bản',
-            sections: [
-                {
-                    title: '📺 Video Bài Học Chọn Lọc',
-                    items: [
-                        { name: '44 Âm IPA Chuẩn Quốc Tế - Dan Hauer', desc: 'Video hướng dẫn khẩu hình chuẩn từng âm cho người Việt', link: 'https://www.youtube.com/watch?v=18-3mR2c5vM' },
-                        { name: 'Mẹo nhận biết 4 Từ loại trong TOEIC Part 5', desc: 'Bài giảng phân biệt Noun, Adj, Adv, Verb dễ hiểu', link: 'https://www.youtube.com/watch?v=J33kO6qO52k' }
-                    ]
-                },
-                {
-                    title: '📚 Tài Liệu & App Luyện Học',
-                    items: [
-                        { name: 'Bộ Flashcard Anki 1000 Từ Vựng TOEIC', desc: 'Tải bộ từ vựng thông dụng cài vào phần mềm Anki', link: 'https://ankiweb.net/shared/decks?search=toeic' },
-                        { name: 'Bài Tập Từ Loại Part 5 - Study4', desc: 'Luyện tập làm bài trực tuyến có giải thích chi tiết', link: 'https://study4.com/practice/toeic-part-5/' }
-                    ]
-                }
+            days: [
+                { day: 'Thứ 2', task: 'Học 4 âm Nguyên âm đơn IPA (/i:/, /ɪ/, /u:/, /ʊ/). Nạp 20 từ vựng chủ đề Office.', links: [{ name: 'Luyện Âm IPA Dan Hauer', url: 'https://www.youtube.com/watch?v=18-3mR2c5vM' }] },
+                { day: 'Thứ 3', task: 'Ngữ pháp: Danh từ (Countable & Uncountable Nouns). Phân biệt vị trí Noun trong câu. Nạp 20 từ vựng.', links: [{ name: 'Luyện Bài Tập Part 5', url: 'https://study4.com/practice/toeic-part-5/' }] },
+                { day: 'Thứ 4', task: 'Học 4 âm Nguyên âm đôi IPA (/eɪ/, /aɪ/, /ɔɪ/, /əʊ/). Nạp 20 từ vựng chủ đề Daily Routine.', links: [{ name: 'Thẻ Anki Từ Vựng', url: 'https://ankiweb.net/shared/decks?search=toeic' }] },
+                { day: 'Thứ 5', task: 'Ngữ pháp: Tính từ (Adjective) & Trạng từ (Adverb). Quy tắc vị trí Adj + N, V + Adv. Nạp 20 từ vựng.', links: [{ name: 'Bài Tập Từ Loại', url: 'https://study4.com/practice/toeic-part-5/' }] },
+                { day: 'Thứ 6', task: 'Học 6 âm Phụ âm IPA (/p/, /b/, /t/, /d/, /k/, /g/). Nghe thử 5 câu Part 1 đơn giản.', links: [{ name: 'Luyện Part 1 Tranh', url: 'https://study4.com/practice/toeic-part-1/' }] },
+                { day: 'Thứ 7', task: 'Ngữ pháp: Đại từ (Pronoun - Subject, Object, Possessive). Giải 15 câu Part 5 chọn lọc.', links: [{ name: 'Luyện Bài Tập Part 5', url: 'https://study4.com/practice/toeic-part-5/' }] },
+                { day: 'Chủ Nhật', task: 'Review lại 140 từ vựng đã học trong tuần qua Anki. Nghỉ ngơi nhẹ nhàng.', links: [] }
             ]
         },
         'w3_4': {
             title: 'Tuần 3 - 4: 6 Thì Cốt Lõi & Nghe Chép Chính Tả',
-            sections: [
-                {
-                    title: '🎧 Nghe Chép Chính Tả & Audio',
-                    items: [
-                        { name: 'VOA Learning English (News Story)', desc: 'Nguồn luyện nghe chính tả giọng Mỹ cực chuẩn', link: 'https://learningenglish.voanews.com/' },
-                        { name: 'Luyện Bài Tập Part 1 - Study4', desc: 'Nghe miêu tả tranh có đáp án + Transcript', link: 'https://study4.com/practice/toeic-part-1/' }
-                    ]
-                },
-                {
-                    title: '📖 Ngữ Pháp Cốt Lõi',
-                    items: [
-                        { name: 'Tổng hợp 6 Thì Tiếng Anh Cơ Bản - Prep.vn', desc: 'Bài viết hệ thống đầy đủ công thức và dấu hiệu', link: 'https://prep.vn/blog/12-thi-trong-tieng-anh/' }
-                    ]
-                }
+            days: [
+                { day: 'Thứ 2', task: 'Thì Hiện tại đơn & Hiện tại tiếp diễn. Luyện nghe chép chính tả đoạn audio VOA 1 phút.', links: [{ name: 'Nghe Chép VOA', url: 'https://learningenglish.voanews.com/' }] },
+                { day: 'Thứ 3', task: 'Luyện Part 1: Bẫy miêu tả vật thể & hành động người. Giải 10 câu Part 1 có script.', links: [{ name: 'Luyện Part 1 Study4', url: 'https://study4.com/practice/toeic-part-1/' }] },
+                { day: 'Thứ 4', task: 'Thì Quá khứ đơn & Tương lai đơn (Will vs Be going to). Nạp 25 từ vựng chủ đề Travel.', links: [{ name: 'Tổng hợp Thì Prep.vn', url: 'https://prep.vn/blog/12-thi-trong-tieng-anh/' }] },
+                { day: 'Thứ 5', task: 'Thì Hiện tại hoàn thành (Dấu hiệu for, since, already, yet). Giải 15 câu Part 5 về chia thì.', links: [{ name: 'Bài Tập Part 5', url: 'https://study4.com/practice/toeic-part-5/' }] },
+                { day: 'Thứ 6', task: 'Luyện nghe chép chính tả bài VOA số 2. Nắm vững từ vựng các ngành nghề thông dụng.', links: [{ name: 'Nghe VOA News', url: 'https://learningenglish.voanews.com/' }] },
+                { day: 'Thứ 7', task: 'Tổng ôn 6 thì qua 20 câu bài tập trắc nghiệm Part 5. Check chi tiết lỗi sai.', links: [{ name: 'Thực Hành Part 5', url: 'https://study4.com/practice/toeic-part-5/' }] },
+                { day: 'Chủ Nhật', task: 'Ôn tập toàn bộ từ vựng tuần 3-4. Viết lại các câu nghe chưa rõ trong tuần.', links: [] }
             ]
         },
         'w5_6': {
             title: 'Tuần 5 - 6: Câu Bị Động & Giới Từ TOEIC',
-            sections: [
-                {
-                    title: '📝 Bài Tập Chuyên Đề',
-                    items: [
-                        { name: 'Luyện Bài Tập Part 2 - Study4', desc: 'Nghe và trả lời câu hỏi Wh-questions', link: 'https://study4.com/practice/toeic-part-2/' },
-                        { name: 'Tổng Hợp Giới Từ Hay Gặp Trong TOEIC', desc: 'Bài tổng hợp quy tắc dùng In, On, At, During, Within', link: 'https://prep.vn/blog/gioi-tu-trong-toeic/' },
-                        { name: 'Câu Bị Động (Passive Voice) Từ A-Z', desc: 'Hướng dẫn lý thuyết và bài tập tự luyện', link: 'https://tienganh123.com/cau-bi-dong-trong-tieng-anh' }
-                    ]
-                }
+            days: [
+                { day: 'Thứ 2', task: 'Cấu trúc Bị động (Passive Voice) các thì cơ bản. Giải 10 câu Part 5 thể bị động.', links: [{ name: 'Lý Thuyết Bị Động', url: 'https://tienganh123.com/cau-bi-dong-trong-tieng-anh' }] },
+                { day: 'Thứ 3', task: 'Giới từ thời gian: IN, ON, AT, FOR, DURING, WITHIN. Nạp 25 từ vựng chủ đề Company.', links: [{ name: 'Mẹo Giới Từ TOEIC', url: 'https://prep.vn/blog/gioi-tu-trong-toeic/' }] },
+                { day: 'Thứ 4', task: 'Luyện Nghe Part 2: Dạng câu hỏi Who, Where, When. Tập phản xạ bắt keyword.', links: [{ name: 'Luyện Part 2 Study4', url: 'https://study4.com/practice/toeic-part-2/' }] },
+                { day: 'Thứ 5', task: 'Giới từ nơi chốn & Đi kèm cụm cố định (Interested in, Responsible for...). Giải 15 câu Part 5.', links: [{ name: 'Thực Hành Part 5', url: 'https://study4.com/practice/toeic-part-5/' }] },
+                { day: 'Thứ 6', task: 'Luyện Nghe Part 2: Dạng câu hỏi Why, How, What. Phân tích transcript câu sai.', links: [{ name: 'Luyện Part 2 Online', url: 'https://study4.com/practice/toeic-part-2/' }] },
+                { day: 'Thứ 7', task: 'Tổng hợp bài tập Bị động + Giới từ (25 câu Part 5). Ghi chép Error Log.', links: [{ name: 'Thực Hành Part 5', url: 'https://study4.com/practice/toeic-part-5/' }] },
+                { day: 'Chủ Nhật', task: 'Kiểm tra lại toàn bộ từ vựng & cấu trúc bẫy giới từ đã học trong tuần.', links: [] }
             ]
         },
         'w7_8': {
             title: 'Tuần 7 - 8: So Sánh, Liên Từ & Mini Mock Test',
-            sections: [
-                {
-                    title: '📝 Đề Thi Đánh Giá Giai Đoạn 1',
-                    items: [
-                        { name: 'Luyện Tập Part 5 TOEIC Full Dạng', desc: 'Kho bài tập Part 5 trực tuyến ngắn gọn', link: 'https://study4.com/practice/toeic-part-5/' },
-                        { name: 'Cấu Trúc So Sánh & Liên Từ Trong TOEIC', desc: 'Mẹo phân biệt Although/Despite, Because/Because of', link: 'https://prep.vn/blog/lien-tu-trong-tieng-anh/' },
-                        { name: 'Thi Thử TOEIC 20 Phút (Mini Test)', desc: 'Làm đề kiểm tra trình độ khởi đầu', link: 'https://study4.com/tests/toeic/' }
-                    ]
-                }
+            days: [
+                { day: 'Thứ 2', task: 'Cấu trúc So sánh bằng, So sánh hơn, So sánh nhất. Bẫy bổ nghĩa so sánh (Much, Far...).', links: [{ name: 'Cấu Trúc So Sánh', url: 'https://prep.vn/blog/lien-tu-trong-tieng-anh/' }] },
+                { day: 'Thứ 3', task: 'Liên từ chỉ nguyên nhân/kết quả: Although/Despite, Because/Because of.', links: [{ name: 'Mẹo Liên Từ TOEIC', url: 'https://prep.vn/blog/lien-tu-trong-tieng-anh/' }] },
+                { day: 'Thứ 4', task: 'Luyện tập tổng hợp Part 1 & Part 2 (Nghe 20 câu liên tục không dừng).', links: [{ name: 'Luyện Listening Study4', url: 'https://study4.com/practice/toeic-part-1/' }] },
+                { day: 'Thứ 5', task: 'Giải 20 câu Part 5 chuyên đề Liên từ + So sánh. Phân tích cấu trúc câu cẩn thận.', links: [{ name: 'Luyện Part 5 Fast', url: 'https://study4.com/practice/toeic-part-5/' }] },
+                { day: 'Thứ 6', task: 'Chuẩn bị tâm lý thi thử: Review lại toàn bộ sổ tay kiến thức Giai đoạn 1.', links: [] },
+                { day: 'Thứ 7', task: 'Thi Thử Mini Test 60 Phút (LC 50 câu + RC 50 câu). Chấm điểm đánh giá.', links: [{ name: 'Thi Thử Mini Test', url: 'https://study4.com/tests/toeic/' }] },
+                { day: 'Chủ Nhật', task: 'Sửa chi tiết bài thi thử. Ghi chép lại toàn bộ từ mới và câu làm sai.', links: [] }
             ]
         },
         'w9_10': {
-            title: 'Tuần 9 - 10: Chiếm Trọn Điểm Part 1 & Part 5',
-            sections: [
-                {
-                    title: '📚 Từ Vựng & Kỹ Năng',
-                    items: [
-                        { name: '600 Essential Words for TOEIC (Quizlet)', desc: 'Học từ vựng 600 từ qua thẻ Flashcard cực tiện', link: 'https://quizlet.com/vn/subject/600-essential-words-for-the-toeic/' },
-                        { name: 'Mẹo Giải Nhanh Part 1 - YouTube', desc: 'Bài giảng phương pháp loại trừ bẫy Being+V3', link: 'https://www.youtube.com/results?search_query=meo+lam+part+1+toeic' },
-                        { name: 'Luyện Thi TOEIC Part 1 Online', desc: 'Thực hành giải đề Part 1 mới nhất', link: 'https://study4.com/practice/toeic-part-1/' }
-                    ]
-                }
+            title: 'Tuần 9 - 10: Part 1 (Hình ảnh) & Part 5 (Từ loại 15s)',
+            days: [
+                { day: 'Thứ 2', task: 'Học 30 Động từ miêu tả hành động người hay gặp nhất Part 1 (carrying, holding...).', links: [{ name: '600 Từ Quizlet', url: 'https://quizlet.com/vn/subject/600-essential-words-for-the-toeic/' }] },
+                { day: 'Thứ 3', task: 'Kỹ thuật làm Part 5 trong 15s: Nhìn đáp án trước -> Xác định đuôi từ loại -> Chọn ngay.', links: [{ name: 'Video Mẹo Part 5', url: 'https://www.youtube.com/results?search_query=meo+part+5+toeic' }] },
+                { day: 'Thứ 4', task: 'Học 30 Động từ miêu tả vật thể/trạng thái Part 1 (display, arrange, stack...).', links: [{ name: 'Luyện Part 1 Tranh', url: 'https://study4.com/practice/toeic-part-1/' }] },
+                { day: 'Thứ 5', task: 'Giải 25 câu Part 5 Từ loại nâng cao. Tập bấm giờ 15 giây/câu.', links: [{ name: 'Luyện Part 5', url: 'https://study4.com/practice/toeic-part-5/' }] },
+                { day: 'Thứ 6', task: 'Luyện trọn bộ Part 1 (6 tranh full) của 2 đề ETS. Yêu cầu đúng 5/6 câu.', links: [{ name: 'Luyện Part 1 Online', url: 'https://study4.com/practice/toeic-part-1/' }] },
+                { day: 'Thứ 7', task: 'Cày 30 câu Part 5 tổng hợp. Ghi chép các từ loại bất quy tắc (VD: hard vs hardly).', links: [{ name: 'Thực Hành Part 5', url: 'https://study4.com/practice/toeic-part-5/' }] },
+                { day: 'Chủ Nhật', task: 'Ôn lại 60 động từ Part 1 & bộ từ vựng Part 5 tích lũy trong tuần.', links: [] }
             ]
         },
         'w11_12': {
-            title: 'Tuần 11 - 12: Kỹ Thuật Làm Part 2 & Bẫy Đồng Âm',
-            sections: [
-                {
-                    title: '🎯 Chiến Thuật Làm Bài Part 2',
-                    items: [
-                        { name: 'Luyện Thi TOEIC Part 2 Kho Đề Chuẩn', desc: 'Làm bài tập Part 2 bấm giờ có audio chất lượng cao', link: 'https://study4.com/practice/toeic-part-2/' },
-                        { name: 'Bẫy Từ Đồng Âm Part 2 TOEIC - YouTube', desc: 'Video hướng dẫn né bẫy Same-sound cực hay', link: 'https://www.youtube.com/results?search_query=bay+dong+am+part+2+toeic' },
-                        { name: 'Liên Từ Và Giới Từ Nâng Cao Part 5', desc: 'Chuyên đề xử lý các câu khó trong Part 5', link: 'https://prep.vn/blog/lien-tu-trong-tieng-anh/' }
-                    ]
-                }
+            title: 'Tuần 11 - 12: Part 2 (Hỏi-Đáp) & Part 5 (Liên từ/Giới từ)',
+            days: [
+                { day: 'Thứ 2', task: 'Part 2: Chiến thuật làm dạng câu hỏi Yes/No & Câu hỏi lựa chọn (OR).', links: [{ name: 'Luyện Part 2 Study4', url: 'https://study4.com/practice/toeic-part-2/' }] },
+                { day: 'Thứ 3', task: 'Part 5: Phân biệt Liên từ + Clause vs Giới từ + Noun Phrase (Due to vs Because).', links: [{ name: 'Bài Viết Prep.vn', url: 'https://prep.vn/blog/lien-tu-trong-tieng-anh/' }] },
+                { day: 'Thứ 4', task: 'Part 2: Nhận diện bẫy Từ Đồng Âm (Same Sound) và Lặp Từ (Word Repetition).', links: [{ name: 'Video Bẫy Part 2', url: 'https://www.youtube.com/results?search_query=bay+dong+am+part+2+toeic' }] },
+                { day: 'Thứ 5', task: 'Part 5: Chuyên đề Đại từ quan hệ (Who, Whom, Which, That, Whose).', links: [{ name: 'Luyện Part 5', url: 'https://study4.com/practice/toeic-part-5/' }] },
+                { day: 'Thứ 6', task: 'Luyện 25 câu Part 2 liên tục (Đề ETS 2023). Đánh dấu câu bị giật mình/bẫy.', links: [{ name: 'Luyện Part 2 Full', url: 'https://study4.com/practice/toeic-part-2/' }] },
+                { day: 'Thứ 7', task: 'Sửa chi tiết Part 2: Đọc transcript, phát âm theo các câu nghe chưa rõ.', links: [] },
+                { day: 'Chủ Nhật', task: 'Tổng ôn lại toàn bộ mẹo loại trừ bẫy Part 2 & ghi chép Error Log Part 5.', links: [] }
             ]
         },
         'w13_15': {
-            title: 'Tuần 13 - 15: Kỹ Năng Đọc Trước Đề Part 3 & Part 6',
-            sections: [
-                {
-                    title: '🎧 Luyện Thi Part 3 & Part 6',
-                    items: [
-                        { name: 'Luyện Tập TOEIC Part 3 Có Sub - Study4', desc: 'Hỗ trợ nghe từng câu và kiểm tra đáp án', link: 'https://study4.com/practice/toeic-part-3/' },
-                        { name: 'Luyện Tập TOEIC Part 6 (Điền Đoạn)', desc: 'Tổng hợp các bài đọc điền câu chuẩn định dạng', link: 'https://study4.com/practice/toeic-part-6/' },
-                        { name: 'Kỹ Thuật Đọc Trước Câu Hỏi Part 3', desc: 'Video hướng dẫn phân bổ mắt và tai khi nghe', link: 'https://www.youtube.com/results?search_query=meo+part+3+toeic' }
-                    ]
-                }
+            title: 'Tuần 13 - 15: Part 3 (Hội thoại) & Part 6 (Điền đoạn văn)',
+            days: [
+                { day: 'Thứ 2', task: 'Kỹ năng Skimming Part 3: Đọc 3 câu hỏi trong 12 giây nghỉ giữa các bài nói.', links: [{ name: 'Mẹo Part 3 YouTube', url: 'https://www.youtube.com/results?search_query=meo+part+3+toeic' }] },
+                { day: 'Thứ 3', task: 'Part 6: Phương pháp điền câu vào khoảng trống (Phân tích liên kết ngữ cảnh).', links: [{ name: 'Luyện Part 6 Study4', url: 'https://study4.com/practice/toeic-part-6/' }] },
+                { day: 'Thứ 4', task: 'Part 3: Luyện nghe dạng câu hỏi có Hình ảnh/Biểu đồ đi kèm (Graphic questions).', links: [{ name: 'Luyện Part 3 Online', url: 'https://study4.com/practice/toeic-part-3/' }] },
+                { day: 'Thứ 5', task: 'Part 6: Giải 4 đoạn Part 6 (16 câu). Giới hạn thời gian 8 phút.', links: [{ name: 'Luyện Part 6', url: 'https://study4.com/practice/toeic-part-6/' }] },
+                { day: 'Thứ 6', task: 'Luyện trọn vẹn 39 câu Part 3 của 1 đề ETS. Tra từ mới trong transcript.', links: [{ name: 'Luyện Part 3 Full', url: 'https://study4.com/practice/toeic-part-3/' }] },
+                { day: 'Thứ 7', task: 'Dịch lại 2 bài nói Part 3 nghe kém nhất để học cụm từ giao tiếp công sở.', links: [] },
+                { day: 'Chủ Nhật', task: 'Thư giãn & ôn tập flashcard từ vựng chuyên ngành công sở.', links: [] }
             ]
         },
         'w16_18': {
-            title: 'Tuần 16 - 18: Part 4 Speeches & Part 7 Scanning',
-            sections: [
-                {
-                    title: '📖 Đọc Hiểu Nhanh Part 7',
-                    items: [
-                        { name: 'Luyện Tập TOEIC Part 4 Online', desc: 'Kho bài tập bài nói đơn kèm giải thích', link: 'https://study4.com/practice/toeic-part-4/' },
-                        { name: 'Luyện Tập TOEIC Part 7 (Đoạn Đơn)', desc: 'Rèn kỹ năng Skimming & Scanning', link: 'https://study4.com/practice/toeic-part-7/' },
-                        { name: 'Phương Pháp Paraphrasing Part 7', desc: 'Bài viết học cách tìm từ đồng nghĩa', link: 'https://prep.vn/blog/paraphrase-la-gi/' }
-                    ]
-                }
+            title: 'Tuần 16 - 18: Part 4 (Bài nói) & Part 7 (Đoạn đơn)',
+            days: [
+                { day: 'Thứ 2', task: 'Part 4: Nhận diện dạng bài Announcement (Thông báo) & Telephone message (Lời nhắn).', links: [{ name: 'Luyện Part 4 Study4', url: 'https://study4.com/practice/toeic-part-4/' }] },
+                { day: 'Thứ 3', task: 'Part 7: Kỹ năng Scanning tìm từ khóa (Tên riêng, Con số, Ngày tháng, Giá tiền).', links: [{ name: 'Luyện Part 7 Đoạn Đơn', url: 'https://study4.com/practice/toeic-part-7/' }] },
+                { day: 'Thứ 4', task: 'Part 4: Dạng bài Advertisement (Quảng cáo) & Talk (Bài phát biểu ngắn).', links: [{ name: 'Luyện Part 4 Online', url: 'https://study4.com/practice/toeic-part-4/' }] },
+                { day: 'Thứ 5', task: 'Part 7: Xử lý dạng bài Email/Letter. Học cách nhận biết Paraphrase.', links: [{ name: 'Mẹo Paraphrase Prep', url: 'https://prep.vn/blog/paraphrase-la-gi/' }] },
+                { day: 'Thứ 6', task: 'Giải 30 câu Part 4 (10 đoạn) bấm giờ. Đọc trước câu hỏi nghiêm túc.', links: [{ name: 'Luyện Part 4', url: 'https://study4.com/practice/toeic-part-4/' }] },
+                { day: 'Thứ 7', task: 'Giải 5 đoạn đơn Part 7 (20 câu). Quản lý thời gian 20 phút.', links: [{ name: 'Luyện Part 7', url: 'https://study4.com/practice/toeic-part-7/' }] },
+                { day: 'Chủ Nhật', task: 'Tổng kết các từ đồng nghĩa (Synonyms) tìm thấy trong Part 7 tuần này.', links: [] }
             ]
         },
         'w19_20': {
             title: 'Tuần 19 - 20: Cross-Reference Part 7 Đoạn Đôi/Ba',
-            sections: [
-                {
-                    title: '🏆 Thi Thử Online Đánh Giá 650+',
-                    items: [
-                        { name: 'Thi Thử TOEIC Full Test Online - Study4', desc: 'Đề thi 200 câu bấm giờ thật 120 phút', link: 'https://study4.com/tests/toeic/' },
-                        { name: 'Mẹo Giải Part 7 Đoạn Đôi & Đoạn Ba', desc: 'Kỹ thuật nối thông tin giữa các văn bản', link: 'https://www.youtube.com/results?search_query=doan+doi+doan+ba+toeic' },
-                        { name: 'Kho Đề Thi Thử TOEIC Miễn Phí', desc: 'Bộ đề cập nhật theo form thi IIG mới nhất', link: 'https://study4.com/tests/toeic/' }
-                    ]
-                }
+            days: [
+                { day: 'Thứ 2', task: 'Part 7 Đoạn đôi: Kỹ thuật nối thông tin giữa Văn bản 1 và Văn bản 2.', links: [{ name: 'Video Đoạn Đôi/Ba', url: 'https://www.youtube.com/results?search_query=doan+doi+doan+ba+toeic' }] },
+                { day: 'Thứ 3', task: 'Part 7 Đoạn ba: Thứ tự đọc hợp lý để không bị rợp mắt (Đọc câu hỏi trước).', links: [{ name: 'Luyện Part 7 Multi', url: 'https://study4.com/practice/toeic-part-7/' }] },
+                { day: 'Thứ 4', task: 'Giải 2 bài Đoạn đôi + 2 bài Đoạn ba. Bấm giờ tối đa 25 phút.', links: [{ name: 'Luyện Part 7 Study4', url: 'https://study4.com/practice/toeic-part-7/' }] },
+                { day: 'Thứ 5', task: 'Sửa kỹ bài Part 7: Đánh dấu vị trí đáp án nằm ở đâu trong bài đọc.', links: [] },
+                { day: 'Thứ 6', task: 'Tổng ôn kỹ năng làm bài của cả 7 Part trước khi thi đánh giá.', links: [] },
+                { day: 'Thứ 7', task: 'Thi Thử Full Test 200 Câu (Bấm giờ đúng 120 phút không tạm dừng).', links: [{ name: 'Thi Thử Full Test', url: 'https://study4.com/tests/toeic/' }] },
+                { day: 'Chủ Nhật', task: 'Phân tích điểm số Full Test: Đạt mục tiêu 600+ chưa? Ghi Error Log.', links: [] }
             ]
         },
         'w21_24': {
-            title: 'Tuần 21 - 24: Thực Chiến Bộ Đề ETS 2023/2024',
-            sections: [
-                {
-                    title: '🔥 Bộ Đề ETS Thi Thật',
-                    items: [
-                        { name: 'Bộ Đề ETS TOEIC 2023 Full Test', desc: 'Giải trọn bộ ETS 2023 có chấm điểm tự động', link: 'https://study4.com/tests/toeic/' },
-                        { name: 'Bộ Đề ETS TOEIC 2024 Mới Nhất', desc: 'Cập nhật đề thi ETS mới nhất', link: 'https://study4.com/tests/toeic/' },
-                        { name: 'Kênh Chữa Chi Tiết Đề ETS (YouTube)', desc: 'Xem bài giảng chữa từng câu của các thầy cô Việt Nam', link: 'https://www.youtube.com/results?search_query=chua+de+ets+toeic' }
-                    ]
-                }
+            title: 'Tuần 21 - 24: Cày Bộ ETS (2 Đề/Tuần + Chữa đề sâu)',
+            days: [
+                { day: 'Thứ 2', task: 'Giải Full Đề ETS Test 1 (2 tiếng nghiêm túc, tô answer sheet).', links: [{ name: 'Bộ Đề ETS 2023', url: 'https://study4.com/tests/toeic/' }] },
+                { day: 'Thứ 3', task: 'Chữa Đề Test 1 - Listening: Nghe lại câu sai, tra script Part 3&4.', links: [{ name: 'Xem Chữa Đề ETS', url: 'https://www.youtube.com/results?search_query=chua+de+ets+toeic' }] },
+                { day: 'Thứ 4', task: 'Chữa Đề Test 1 - Reading: Tra từ mới Part 5, 6, 7. Cập nhật Error Log.', links: [] },
+                { day: 'Thứ 5', task: 'Giải Full Đề ETS Test 2 (2 tiếng nghiêm túc).', links: [{ name: 'Bộ Đề ETS 2024', url: 'https://study4.com/tests/toeic/' }] },
+                { day: 'Thứ 6', task: 'Chữa Đề Test 2 - Listening: Tập trung nghe lại Part 2 & Part 3.', links: [] },
+                { day: 'Thứ 7', task: 'Chữa Đề Test 2 - Reading: Dịch lại các đoạn văn Part 7 sai nhiều.', links: [] },
+                { day: 'Chủ Nhật', task: 'Review lại toàn bộ từ vựng và câu hỏi sai của 2 đề trong tuần.', links: [] }
             ]
         },
         'w25_28': {
             title: 'Tuần 25 - 28: Khóa Chặt Thời Gian & Hacker TOEIC',
-            sections: [
-                {
-                    title: '⚡ Đề Nâng Cao & Tốc Độ',
-                    items: [
-                        { name: 'Bộ Đề Hacker TOEIC Practice Tests', desc: 'Thử thách độ khó cao cho mục tiêu 800-900+', link: 'https://study4.com/tests/toeic/' },
-                        { name: 'Bảng Phân Bổ Thời Gian Part 5-6-7', desc: 'Quy tắc 15p - 25p - 30p chuẩn đét', link: 'https://prep.vn/blog/quan-ly-thoi-gian-thi-toeic/' },
-                        { name: 'Luyện Đề Bấm Giờ Áp Lực Thi Thật', desc: 'Luyện tập thao tác tô đáp án nhanh', link: 'https://study4.com/tests/toeic/' }
-                    ]
-                }
+            days: [
+                { day: 'Thứ 2', task: 'Luyện riêng Part 5 & 6 (52 câu): Yêu cầu hoàn thành dưới 16 phút.', links: [{ name: 'Quản Lý Thời Gian', url: 'https://prep.vn/blog/quan-ly-thoi-gian-thi-toeic/' }] },
+                { day: 'Thứ 3', task: 'Luyện riêng Part 7 Đoạn đơn (29 câu): Khóa thời gian 25 phút.', links: [{ name: 'Luyện Part 7 Speed', url: 'https://study4.com/practice/toeic-part-7/' }] },
+                { day: 'Thứ 4', task: 'Luyện riêng Part 7 Đoạn đôi/ba (25 câu): Khóa thời gian 30 phút.', links: [{ name: 'Luyện Part 7 Multi', url: 'https://study4.com/practice/toeic-part-7/' }] },
+                { day: 'Thứ 5', task: 'Thử thách Đề Nâng Cao (Hacker TOEIC Test): Làm 100 câu Reading khó.', links: [{ name: 'Hacker TOEIC Test', url: 'https://study4.com/tests/toeic/' }] },
+                { day: 'Thứ 6', task: 'Giải 1 Đề Full ETS bấm giờ kỷ luật ép tốc độ.', links: [{ name: 'Thi Thử ETS', url: 'https://study4.com/tests/toeic/' }] },
+                { day: 'Thứ 7', task: 'Sửa đề chi tiết: Tìm nguyên nhân sai do thiếu thời gian hay bị bẫy.', links: [] },
+                { day: 'Chủ Nhật', task: 'Nghỉ ngơi, hệ thống lại sổ tay bẫy thời gian Part 7.', links: [] }
             ]
         },
         'w29_30': {
             title: 'Tuần 29 - 30: Tổng Ôn Error Log & Chuẩn Bị Thi',
-            sections: [
-                {
-                    title: '🎯 Đăng Ký Thi & Thủ Tục IIG',
-                    items: [
-                        { name: 'Trang Chủ Đăng Ký Thi IIG Việt Nam', desc: 'Cổng thông tin chính thức đăng ký lịch thi TOEIC', link: 'https://iigvietnam.com/' },
-                        { name: 'Quy Định Giấy Tờ & Ảnh Thẻ Khi Đi Thi TOEIC', desc: 'Lưu ý quan trọng để không bị hủy lượt thi', link: 'https://iigvietnam.com/vi/tin-tuc/huong-dan-dang-ky-du-thi-toeic.html' },
-                        { name: 'Kinh Nghiệm Đi Thi Real Test Của Học Viên 850+', desc: 'Chia sẻ tâm lý và chiến thuật trong phòng thi', link: 'https://www.youtube.com/results?search_query=kinh+nghiem+di+thi+toeic' }
-                    ]
-                }
+            days: [
+                { day: 'Thứ 2', task: 'Đọc lại 100% Sổ tay lỗi sai (Error Log) tích lũy trong suốt lộ trình.', links: [] },
+                { day: 'Thứ 3', task: 'Luyện 1 đề Listening nhẹ nhàng để duy trì phản xạ tai nghe.', links: [{ name: 'Luyện Listening ETS', url: 'https://study4.com/tests/toeic/' }] },
+                { day: 'Thứ 4', task: 'Xem lại quy định thi tại IIG: Chuẩn bị CCCD/CMND, Ảnh 3x4, Giấy báo thi.', links: [{ name: 'Trang Chủ IIG VN', url: 'https://iigvietnam.com/' }] },
+                { day: 'Thứ 5', task: 'Thi thử đề cuối cùng duy trì cảm giác làm bài (Không quan trọng điểm).', links: [{ name: 'Thi Thử Cuối Cùng', url: 'https://study4.com/tests/toeic/' }] },
+                { day: 'Thứ 6', task: 'Nghỉ ngơi hoàn toàn, không học thêm kiến thức mới. Đi ngủ sớm.', links: [{ name: 'Kinh Nghiệm Phòng Thi', url: 'https://www.youtube.com/results?search_query=kinh+nghiem+di+thi+toeic' }] },
+                { day: 'Thứ 7', task: 'Chuẩn bị trang phục, giấy tờ. Đến địa điểm thi sớm trước 30 phút.', links: [] },
+                { day: 'Chủ Nhật', task: 'Hoàn thành kỳ thi thật! Nhận kết quả và ăn mừng sự nỗ lực!', links: [] }
             ]
         }
     };
 
-    // Modal Control Functions
+    // Modal Control Functions (Render Daily Tasks)
     function openResourceModal(weekKey) {
-        const data = resourceDB[weekKey];
+        const data = dailyScheduleDB[weekKey];
         if (!data) return;
 
         document.getElementById('modalTitle').innerText = data.title;
         const modalBody = document.getElementById('modalBody');
         modalBody.innerHTML = '';
 
-        data.sections.forEach(sec => {
-            const secDiv = document.createElement('div');
-            secDiv.className = 'resource-section';
+        data.days.forEach(item => {
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'day-card';
             
-            let itemsHTML = '';
-            sec.items.forEach(item => {
-                itemsHTML += `
-                    <li class="resource-item">
-                        <div class="resource-info">
-                            <h5>${escapeHtml(item.name)}</h5>
-                            <p>${escapeHtml(item.desc)}</p>
-                        </div>
-                        <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="resource-link">Truy Cập ↗</a>
-                    </li>
-                `;
-            });
+            let linksHTML = '';
+            if (item.links && item.links.length > 0) {
+                item.links.forEach(l => {
+                    linksHTML += `<a href="${l.url}" target="_blank" rel="noopener noreferrer" class="day-link-btn">${escapeHtml(l.name)} ↗</a>`;
+                });
+            }
 
-            secDiv.innerHTML = `
-                <h4>${escapeHtml(sec.title)}</h4>
-                <ul class="resource-list">${itemsHTML}</ul>
+            dayDiv.innerHTML = `
+                <div class="day-header">
+                    <span class="day-title">📌 ${escapeHtml(item.day)}</span>
+                </div>
+                <div class="day-task-desc">${escapeHtml(item.task)}</div>
+                ${linksHTML ? `<div class="day-links">${linksHTML}</div>` : ''}
             `;
-            modalBody.appendChild(secDiv);
+            modalBody.appendChild(dayDiv);
         });
 
         document.getElementById('resourceModal').classList.add('active');
@@ -1097,9 +1074,9 @@
         const title = document.getElementById('log-title').value;
         const detail = document.getElementById('log-detail').value;
 
-        const logs = JSON.parse(localStorage.getItem('toeic_vn_logs') || '[]');
+        const logs = JSON.parse(localStorage.getItem('toeic_daily_logs') || '[]');
         logs.push({ id: Date.now(), title, detail });
-        localStorage.setItem('toeic_vn_logs', JSON.stringify(logs));
+        localStorage.setItem('toeic_daily_logs', JSON.stringify(logs));
 
         document.getElementById('log-title').value = '';
         document.getElementById('log-detail').value = '';
@@ -1107,15 +1084,15 @@
     }
 
     function deleteLog(id) {
-        let logs = JSON.parse(localStorage.getItem('toeic_vn_logs') || '[]');
+        let logs = JSON.parse(localStorage.getItem('toeic_daily_logs') || '[]');
         logs = logs.filter(l => l.id !== id);
-        localStorage.setItem('toeic_vn_logs', JSON.stringify(logs));
+        localStorage.setItem('toeic_daily_logs', JSON.stringify(logs));
         renderLogs();
     }
 
     function renderLogs() {
         const container = document.getElementById('log-list');
-        const logs = JSON.parse(localStorage.getItem('toeic_vn_logs') || '[]');
+        const logs = JSON.parse(localStorage.getItem('toeic_daily_logs') || '[]');
         document.getElementById('logs-count').innerText = logs.length;
         
         container.innerHTML = '';
@@ -1141,7 +1118,7 @@
     function exportData() {
         const data = {
             checkboxes: {},
-            logs: localStorage.getItem('toeic_vn_logs')
+            logs: localStorage.getItem('toeic_daily_logs')
         };
         document.querySelectorAll('.custom-checkbox').forEach(cb => {
             data.checkboxes[cb.id] = cb.checked;
@@ -1149,7 +1126,7 @@
         const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = `TOEIC_VN_Backup_${new Date().toISOString().slice(0,10)}.json`;
+        a.download = `TOEIC_Daily_Backup_${new Date().toISOString().slice(0,10)}.json`;
         a.click();
     }
 
@@ -1166,7 +1143,7 @@
                     });
                 }
                 if (data.logs) {
-                    localStorage.setItem('toeic_vn_logs', data.logs);
+                    localStorage.setItem('toeic_daily_logs', data.logs);
                 }
                 location.reload();
             } catch (err) {
