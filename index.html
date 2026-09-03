@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOEIC 800+ Ultimate Master Dashboard</title>
+    <title>TOEIC 800+ Ultimate Master Dashboard V3</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
         :root {
             --bg-body: #0F172A;
             --bg-card: #1E293B;
-            --bg-card-hover: #334155;
+            --bg-card-hover: #2D3748;
             --primary: #6366F1;
             --primary-light: #818CF8;
             --secondary: #06B6D4;
@@ -203,10 +203,13 @@
             padding: 14px 16px;
             margin-bottom: 10px;
             transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
         }
 
         .week-card:hover {
             border-color: var(--primary-light);
+            background: var(--bg-card-hover);
             transform: translateY(-1px);
         }
 
@@ -228,6 +231,7 @@
             margin-top: 2px;
             transition: all 0.2s ease;
             position: relative;
+            z-index: 2;
         }
 
         .custom-checkbox:checked {
@@ -244,9 +248,31 @@
             top: -2px; left: 3px;
         }
 
+        .week-content {
+            flex: 1;
+        }
+
+        .week-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .week-title {
             font-size: 15px;
             font-weight: 600;
+        }
+
+        .resource-badge {
+            font-size: 11px;
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--secondary);
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .week-desc {
@@ -271,7 +297,120 @@
             font-weight: 500;
         }
 
-        /* Widgets Right Column */
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 28px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.25s ease;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            color: var(--text-main);
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .modal-close:hover { color: var(--text-main); }
+
+        .resource-section {
+            margin-bottom: 20px;
+        }
+
+        .resource-section h4 {
+            font-size: 14px;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+
+        .resource-list {
+            list-style: none;
+        }
+
+        .resource-item {
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resource-info h5 {
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .resource-info p {
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-top: 2px;
+        }
+
+        .resource-link {
+            background: var(--primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .resource-link:hover { background: #4F46E5; }
+
+        /* Timer & Calc Widgets */
         .timer-display {
             font-size: 36px;
             font-weight: 800;
@@ -285,107 +424,38 @@
             border: 1px solid var(--border);
         }
 
-        .timer-controls {
-            display: flex;
-            gap: 8px;
-        }
-
+        .timer-controls { display: flex; gap: 8px; }
         .timer-controls button { flex: 1; }
 
-        /* Calculator Widget */
-        .calc-inputs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 11px;
-            color: var(--text-sub);
-            margin-bottom: 4px;
-        }
-
+        .calc-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+        .input-group label { display: block; font-size: 11px; color: var(--text-sub); margin-bottom: 4px; }
         .input-group input {
-            width: 100%;
-            background: var(--bg-body);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 8px;
-            color: var(--text-main);
-            font-size: 14px;
+            width: 100%; background: var(--bg-body); border: 1px solid var(--border);
+            border-radius: 6px; padding: 8px; color: var(--text-main); font-size: 14px;
         }
 
         .score-result {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid var(--success);
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
+            background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success);
+            border-radius: 8px; padding: 12px; text-align: center;
         }
-
-        .score-result-val {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--success);
-        }
+        .score-result-val { font-size: 22px; font-weight: 800; color: var(--success); }
 
         /* Error Log Table */
-        .log-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
+        .log-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
         .log-form input, .log-form textarea {
-            background: var(--bg-body);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 8px 12px;
-            color: var(--text-main);
-            font-size: 13px;
+            background: var(--bg-body); border: 1px solid var(--border);
+            border-radius: 6px; padding: 8px 12px; color: var(--text-main); font-size: 13px;
         }
-
-        .log-list {
-            max-height: 250px;
-            overflow-y: auto;
-        }
-
+        .log-list { max-height: 250px; overflow-y: auto; }
         .log-item-card {
-            background: var(--bg-body);
-            border-left: 3px solid var(--primary);
-            padding: 10px 12px;
-            border-radius: 0 6px 6px 0;
-            margin-bottom: 8px;
-            font-size: 12px;
+            background: var(--bg-body); border-left: 3px solid var(--primary);
+            padding: 10px 12px; border-radius: 0 6px 6px 0; margin-bottom: 8px; font-size: 12px;
         }
-
-        .log-item-header {
-            display: flex;
-            justify-content: space-between;
-            font-weight: 700;
-            color: var(--primary-light);
-            margin-bottom: 4px;
-        }
+        .log-item-header { display: flex; justify-content: space-between; font-weight: 700; color: var(--primary-light); margin-bottom: 4px; }
 
         /* Progress Bar */
-        .progress-bar-container {
-            width: 100%;
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            width: 0%;
-            transition: width 0.4s ease;
-        }
+        .progress-bar-container { width: 100%; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 10px; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); width: 0%; transition: width 0.4s ease; }
     </style>
 </head>
 <body>
@@ -394,8 +464,8 @@
     <!-- Header -->
     <header>
         <div class="logo-area">
-            <h1>TOEIC 800+ Master Dashboard</h1>
-            <p>Lộ trình thực chiến 30 tuần - Tự học kỷ luật & Tối ưu hóa điểm số</p>
+            <h1>TOEIC 800+ Master Dashboard V3</h1>
+            <p>Lộ trình 30 tuần - Nhấp vào từng tuần để lấy link tài liệu & bài tập chi tiết</p>
         </div>
         <div class="header-actions">
             <button class="btn" onclick="exportData()"> Export Data</button>
@@ -421,8 +491,8 @@
         </div>
         <div class="metric-card">
             <div class="metric-label">Đã hoàn thành</div>
-            <div class="metric-value" id="weeks-completed">0/30</div>
-            <div class="metric-sub">Tuần học</div>
+            <div class="metric-value" id="weeks-completed">0/12</div>
+            <div class="metric-sub">Giai đoạn chính</div>
         </div>
         <div class="metric-card">
             <div class="metric-label">Error Log</div>
@@ -438,7 +508,7 @@
             <div class="panel">
                 <div class="panel-header">
                     <div class="panel-title">
-                         Chi Tiết Lộ Trình 30 Tuần
+                         Chi Tiết Lộ Trình (Click để xem Resources)
                     </div>
                 </div>
 
@@ -446,26 +516,32 @@
                 <div class="roadmap-phase">
                     <div class="phase-header">Giai đoạn 1: Xây Nền Cơ Bản (Target 350 - 450)</div>
                     
-                    <div class="week-card">
+                    <div class="week-card" onclick="openResourceModal('w1_2')">
                         <div class="week-top">
-                            <input type="checkbox" class="custom-checkbox" id="chk_w1_2" onchange="calcProgress()">
-                            <div>
-                                <div class="week-title">Tuần 1 - 2: Chuẩn hóa Phát âm IPA & Từ loại cốt lõi</div>
+                            <input type="checkbox" class="custom-checkbox" id="chk_w1_2" onclick="event.stopPropagation()" onchange="calcProgress()">
+                            <div class="week-content">
+                                <div class="week-title-row">
+                                    <div class="week-title">Tuần 1 - 2: Chuẩn hóa Phát âm IPA & Từ loại cốt lõi</div>
+                                    <span class="resource-badge">📂 Resources (4)</span>
+                                </div>
                                 <div class="week-desc">Master 44 âm IPA (2 âm/ngày) + Phân biệt Noun, Pronoun, Adj, Adv. Học 20 từ vựng/ngày.</div>
                                 <div class="task-list-inline">
                                     <span class="tag">BBC IPA</span>
-                                    <span class="tag">Grammar in Use Ch.1-4</span>
+                                    <span class="tag">Grammar Ch.1-4</span>
                                     <span class="tag">280 Từ vựng</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="week-card">
+                    <div class="week-card" onclick="openResourceModal('w3_4')">
                         <div class="week-top">
-                            <input type="checkbox" class="custom-checkbox" id="chk_w3_4" onchange="calcProgress()">
-                            <div>
-                                <div class="week-title">Tuần 3 - 4: 6 Thì cốt lõi & Luyện Nghe chép chính tả câu ngắn</div>
+                            <input type="checkbox" class="custom-checkbox" id="chk_w3_4" onclick="event.stopPropagation()" onchange="calcProgress()">
+                            <div class="week-content">
+                                <div class="week-title-row">
+                                    <div class="week-title">Tuần 3 - 4: 6 Thì cốt lõi & Luyện Nghe chép chính tả câu ngắn</div>
+                                    <span class="resource-badge">📂 Resources (4)</span>
+                                </div>
                                 <div class="week-desc">Hiện tại đơn/tiếp diễn, Quá khứ đơn, Hiện tại hoàn thành, Tương lai đơn. Nghe chép chính tả câu 3-5 từ.</div>
                                 <div class="task-list-inline">
                                     <span class="tag">6 Thì chính</span>
@@ -476,11 +552,14 @@
                         </div>
                     </div>
 
-                    <div class="week-card">
+                    <div class="week-card" onclick="openResourceModal('w5_6')">
                         <div class="week-top">
-                            <input type="checkbox" class="custom-checkbox" id="chk_w5_6" onchange="calcProgress()">
-                            <div>
-                                <div class="week-title">Tuần 5 - 6: Câu Bị động & Giới từ thời gian/nơi chốn</div>
+                            <input type="checkbox" class="custom-checkbox" id="chk_w5_6" onclick="event.stopPropagation()" onchange="calcProgress()">
+                            <div class="week-content">
+                                <div class="week-title-row">
+                                    <div class="week-title">Tuần 5 - 6: Câu Bị động & Giới từ thời gian/nơi chốn</div>
+                                    <span class="resource-badge">📂 Resources (3)</span>
+                                </div>
                                 <div class="week-desc">Cấu trúc Passive Voice toàn bộ các thì. Nắm vững In/On/At/For/During/Within. Nghe câu hỏi Wh-questions.</div>
                                 <div class="task-list-inline">
                                     <span class="tag">Passive Voice</span>
@@ -491,11 +570,14 @@
                         </div>
                     </div>
 
-                    <div class="week-card">
+                    <div class="week-card" onclick="openResourceModal('w7_8')">
                         <div class="week-top">
-                            <input type="checkbox" class="custom-checkbox" id="chk_w7_8" onchange="calcProgress()">
-                            <div>
-                                <div class="week-title">Tuần 7 - 8: Câu So sánh, Liên từ & Thi đánh giá Lần 1</div>
+                            <input type="checkbox" class="custom-checkbox" id="chk_w7_8" onclick="event.stopPropagation()" onchange="calcProgress()">
+                            <div class="week-content">
+                                <div class="week-title-row">
+                                    <div class="week-title">Tuần 7 - 8: Câu So sánh, Liên từ & Thi đánh giá Lần 1</div>
+                                    <span class="resource-badge">📂 Resources (3)</span>
+                                </div>
                                 <div class="week-desc">So sánh bằng/hơn/nhất, Liên từ (And, But, Although, Because). Thi thử đề Very Easy TOEIC (Mục tiêu 400+).</div>
                                 <div class="task-list-inline">
                                     <span class="tag">Comparisons</span>
@@ -511,11 +593,14 @@
                 <div class="roadmap-phase">
                     <div class="phase-header">Giai đoạn 2: Chiến Thuật Từng Part (Target 500 - 650)</div>
                     
-                    <div class="week-card">
+                    <div class="week-card" onclick="openResourceModal('w9_10')">
                         <div class="week-top">
-                            <input type="checkbox" class="custom-checkbox" id="chk_w9_10" onchange="calcProgress()">
-                            <div>
-                                <div class="week-title">Tuần 9 - 10: Part 1 (Hình ảnh) & Part 5 (Từ loại 15s)</div>
+                            <input type="checkbox" class="custom-checkbox" id="chk_w9_10" onclick="event.stopPropagation()" onchange="calcProgress()">
+                            <div class="week-content">
+                                <div class="week-title-row">
+                                    <div class="week-title">Tuần 9 - 10: Part 1 (Hình ảnh) & Part 5 (Từ loại 15s)</div>
+                                    <span class="resource-badge">📂 Resources (4)</span>
+                                </div>
                                 <div class="week-desc">Thuộc 100 động từ Part 1 hay gặp. Phương pháp loại trừ bẫy Being+V3. Giải nhanh Part 5 về từ loại trong 15s/câu.</div>
                                 <div class="task-list-inline">
                                     <span class="tag">600 Essential Words</span>
@@ -526,11 +611,14 @@
                         </div>
                     </div>
 
-                    <div class="week-card">
+                    <div class="week-card" onclick="openResourceModal('w11_12')">
                         <div class="week-top">
-                            <input type="checkbox" class="custom-checkbox" id="chk_w11_12" onchange="calcProgress()">
-                            <div>
-                                <div class="week-title">Tuần 11 - 12: Part 2 (Hỏi-Đáp) & Part 5 (Liên từ/Giới từ)</div>
+                            <input type="checkbox" class="custom-checkbox" id="chk_w11_12" onclick="event.stopPropagation()" onchange="calcProgress()">
+                            <div class="week-content">
+                                <div class="week-title-row">
+                                    <div class="week-title">Tuần 11 - 12: Part 2 (Hỏi-Đáp) & Part 5 (Liên từ/Giới từ)</div>
+                                    <span class="resource-badge">📂 Resources (3)</span>
+                                </div>
                                 <div class="week-desc">Luyện bắt Keyword đầu câu hỏi. Bẫy đồng âm (Same-sound). Phân biệt Giới từ (đi với Noun) vs Liên từ (đi với Clause).</div>
                                 <div class="task-list-inline">
                                     <span class="tag">Part 2 Tactics</span>
@@ -541,11 +629,14 @@
                         </div>
                     </div>
 
-                    <div class="week-card">
+                    <div class="week-card" onclick="openResourceModal('w13_15')">
                         <div class="week-top">
-                            <input type="checkbox" class="custom-checkbox" id="chk_w13_15" onchange="calcProgress()">
-                            <div>
-                                <div class="week-title">Tuần 13 - 15: Part 3 (Hội thoại) & Part 6 (Điền đoạn văn)</div>
+                            <input type="checkbox" class="custom-checkbox" id="chk_w13_15" onclick="event.stopPropagation()" onchange="calcProgress()">
+                            <div class="week-content">
+                                <div class="week-title-row">
+                                    <div class="week-title">Tuần 13 - 15: Part 3 (Hội thoại) & Part 6 (Điền đoạn văn)</div>
+                                    <span class="resource-badge">📂 Resources (3)</span>
+                                </div>
                                 <div class="week-desc">Kỹ năng đọc trước 3 câu hỏi trước khi nghe. Điền câu vào khoảng trống Part 6 dựa vào ngữ cảnh liền trước/sau.</div>
                                 <div class="task-list-inline">
                                     <span class="tag">Part 3 Skimming</span>
@@ -556,11 +647,14 @@
                         </div>
                     </div>
 
-                    <div class="week-card">
+                    <div class="week-card" onclick="openResourceModal('w16_18')">
                         <div class="week-top">
-                            <input type="checkbox" class="custom-checkbox" id="chk_w16_18" onchange="calcProgress()">
-                            <div>
-                                <div class="week-title">Tuần 16 - 18: Part 4 (Bài nói) & Part 7 (Đoạn đơn)</div>
+                            <input type="checkbox" class="custom-checkbox" id="chk_w16_18" onclick="event.stopPropagation()" onchange="calcProgress()">
+                            <div class="week-content">
+                                <div class="week-title-row">
+                                    <div class="week-title">Tuần 16 - 18: Part 4 (Bài nói) & Part 7 (Đoạn đơn)</div>
+                                    <span class="resource-badge">📂 Resources (3)</span>
+                                </div>
                                 <div class="week-desc">Nhận diện cấu trúc Broadcast/Announcement/Voice message. Kỹ năng Scanning tìm thông tin nhanh ở Part 7 Đoạn đơn.</div>
                                 <div class="task-list-inline">
                                     <span class="tag">Part 4 Speeches</span>
@@ -571,11 +665,14 @@
                         </div>
                     </div>
 
-                    <div class="week-card">
+                    <div class="week-card" onclick="openResourceModal('w19_20')">
                         <div class="week-top">
-                            <input type="checkbox" class="custom-checkbox" id="chk_w19_20" onchange="calcProgress()">
-                            <div>
-                                <div class="week-title">Tuần 19 - 20: Part 7 (Đoạn đôi/ba) & Thi đánh giá Lần 2</div>
+                            <input type="checkbox" class="custom-checkbox" id="chk_w19_20" onclick="event.stopPropagation()" onchange="calcProgress()">
+                            <div class="week-content">
+                                <div class="week-title-row">
+                                    <div class="week-title">Tuần 19 - 20: Part 7 (Đoạn đôi/ba) & Thi đánh giá Lần 2</div>
+                                    <span class="resource-badge">📂 Resources (3)</span>
+                                </div>
                                 <div class="week-desc">Phương pháp Cross-reference (kết nối 2-3 đoạn để trả lời câu hỏi phức tạp). Thi thử ETS Test 1 (Mục tiêu 600+).</div>
                                 <div class="task-list-inline">
                                     <span class="tag">Part 7 Multi-Passage</span>
@@ -591,11 +688,14 @@
                 <div class="roadmap-phase">
                     <div class="phase-header">Giai đoạn 3: Thực Chiến Luyện Đề & Sửa Lỗi Triệt Để (Target 750 - 800+)</div>
                     
-                    <div class="week-card">
+                    <div class="week-card" onclick="openResourceModal('w21_24')">
                         <div class="week-top">
-                            <input type="checkbox" class="custom-checkbox" id="chk_w21_24" onchange="calcProgress()">
-                            <div>
-                                <div class="week-title">Tuần 21 - 24: Cày Bộ ETS (2 Đề/Tuần + Chữa đề sâu)</div>
+                            <input type="checkbox" class="custom-checkbox" id="chk_w21_24" onclick="event.stopPropagation()" onchange="calcProgress()">
+                            <div class="week-content">
+                                <div class="week-title-row">
+                                    <div class="week-title">Tuần 21 - 24: Cày Bộ ETS (2 Đề/Tuần + Chữa đề sâu)</div>
+                                    <span class="resource-badge">📂 Resources (3)</span>
+                                </div>
                                 <div class="week-desc">Giải đề áp lực 120 phút. Chữa đề 100%: Nghe lại không xem Transcript $\rightarrow$ Đọc Script tra từ mới $\rightarrow$ Phân tích bẫy sai.</div>
                                 <div class="task-list-inline">
                                     <span class="tag">ETS 2023/2024</span>
@@ -606,11 +706,14 @@
                         </div>
                     </div>
 
-                    <div class="week-card">
+                    <div class="week-card" onclick="openResourceModal('w25_28')">
                         <div class="week-top">
-                            <input type="checkbox" class="custom-checkbox" id="chk_w25_28" onchange="calcProgress()">
-                            <div>
-                                <div class="week-title">Tuần 25 - 28: Tối ưu Thời Gian Part 7 & Hacker TOEIC Challenge</div>
+                            <input type="checkbox" class="custom-checkbox" id="chk_w25_28" onclick="event.stopPropagation()" onchange="calcProgress()">
+                            <div class="week-content">
+                                <div class="week-title-row">
+                                    <div class="week-title">Tuần 25 - 28: Tối ưu Thời Gian Part 7 & Hacker TOEIC Challenge</div>
+                                    <span class="resource-badge">📂 Resources (3)</span>
+                                </div>
                                 <div class="week-desc">Khóa chặt thời gian: Part 5+6 (15-18 phút), Part 7 Đoạn đơn (25 phút), Đoạn đôi/ba (30 phút). Làm câu nâng cao từ Hacker Vol 3.</div>
                                 <div class="task-list-inline">
                                     <span class="tag">Strict Time Management</span>
@@ -621,11 +724,14 @@
                         </div>
                     </div>
 
-                    <div class="week-card">
+                    <div class="week-card" onclick="openResourceModal('w29_30')">
                         <div class="week-top">
-                            <input type="checkbox" class="custom-checkbox" id="chk_w29_30" onchange="calcProgress()">
-                            <div>
-                                <div class="week-title">Tuần 29 - 30: Rà soát Error Log & Thi thật</div>
+                            <input type="checkbox" class="custom-checkbox" id="chk_w29_30" onclick="event.stopPropagation()" onchange="calcProgress()">
+                            <div class="week-content">
+                                <div class="week-title-row">
+                                    <div class="week-title">Tuần 29 - 30: Rà soát Error Log & Thi thật</div>
+                                    <span class="resource-badge">📂 Resources (3)</span>
+                                </div>
                                 <div class="week-desc">Đọc lại toàn bộ Sổ tay lỗi sai. Thi thử 2 đề cuối giữ phong độ. Chuẩn bị tâm lý thi chính thức.</div>
                                 <div class="task-list-inline">
                                     <span class="tag">Error Log Review</span>
@@ -678,7 +784,7 @@
                 <div class="panel-title"> Sổ Tay Lỗi Sai (Error Log)</div>
                 <form class="log-form" onsubmit="saveLog(event)" style="margin-top: 12px;">
                     <input type="text" id="log-title" placeholder="VD: Part 5 - Câu 112 (Liên từ)" required>
-                    <textarea id="log-detail" rows="2" placeholder="VD: Sai do nhầm 'Although' + S+V với 'Despite' + Noun. Ngữ cảnh cần cụm danh từ." required></textarea>
+                    <textarea id="log-detail" rows="2" placeholder="VD: Sai do nhầm 'Although' + S+V với 'Despite' + Noun." required></textarea>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Lưu Lỗi Sai</button>
                 </form>
 
@@ -691,10 +797,229 @@
     </div>
 </div>
 
+<!-- Modal Resource Window -->
+<div class="modal-overlay" id="resourceModal" onclick="closeResourceModal(event)">
+    <div class="modal-container" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <div>
+                <h2 id="modalTitle">Tài Liệu Hướng Dẫn</h2>
+                <p id="modalSub" style="font-size: 13px; color: var(--text-sub); margin-top: 4px;">Danh sách tài liệu chọn lọc cho giai đoạn này</p>
+            </div>
+            <button class="modal-close" onclick="closeResourceModal(null)">✕</button>
+        </div>
+        <div id="modalBody">
+            <!-- Dynamic Content Injected Here -->
+        </div>
+    </div>
+</div>
+
 <script>
+    // Resources Database
+    const resourceDB = {
+        'w1_2': {
+            title: 'Tuần 1 - 2: Chuẩn Hóa IPA & Từ Loại Căn Bản',
+            sections: [
+                {
+                    title: '📺 Video Bài Học Chọn Lọc',
+                    items: [
+                        { name: 'Trọn bộ 44 âm IPA tiếng Anh chuẩn Quốc Tế', desc: 'BBC Learning English (YouTube)', link: 'https://www.youtube.com/results?search_query=bbc+learning+english+pronunciation' },
+                        { name: 'Mẹo nhận biết 4 Từ loại trong TOEIC Part 5', desc: 'Video phân biệt Noun, Adj, Adv, Verb nhanh', link: 'https://www.youtube.com/results?search_query=tu+loai+part+5+toeic' }
+                    ]
+                },
+                {
+                    title: '📚 Tài Liệu PDF & File Bài Tập',
+                    items: [
+                        { name: 'Sách English Grammar in Use (Tập 1 - Nền tảng)', desc: 'Chương 1 - 4: Thì cơ bản và Từ loại', link: 'https://www.google.com/search?q=English+Grammar+in+Use+pdf' },
+                        { name: 'Deck Anki 1000 Từ Vựng TOEIC Căn Bản', desc: 'File Flashcard học từ vựng mỗi ngày', link: 'https://ankiweb.net/shared/decks?search=toeic' }
+                    ]
+                }
+            ]
+        },
+        'w3_4': {
+            title: 'Tuần 3 - 4: 6 Thì Cốt Lõi & Nghe Chép Chính Tả',
+            sections: [
+                {
+                    title: '🎧 Nghe Chép Chính Tả & Audio',
+                    items: [
+                        { name: 'VOA Learning English - News Stories', desc: 'Nguồn nghe chép chính tả chậm, giọng chuẩn Mỹ', link: 'https://learningenglish.voanews.com/' },
+                        { name: 'Luyện Nghe Part 1: Hình Ảnh Người & Vật', desc: 'Bộ bài tập nghe Part 1 kèm Transcript', link: 'https://study4.com/tests/toeic/' }
+                    ]
+                },
+                {
+                    title: '📖 Bảng Cấu Trúc Ngữ Pháp',
+                    items: [
+                        { name: 'Tóm tắt 6 Thì hay gặp nhất trong đề TOEIC', desc: 'File tổng hợp Dấu hiệu nhận biết & Công thức', link: 'https://www.google.com/search?q=6+thi+co+ban+toeic+pdf' }
+                    ]
+                }
+            ]
+        },
+        'w5_6': {
+            title: 'Tuần 5 - 6: Câu Bị Động & Giới Từ TOEIC',
+            sections: [
+                {
+                    title: '📝 Bài Tập Chuyên Đề',
+                    items: [
+                        { name: '100 Câu Bài Tập Bị Động Part 5 Có Đáp Án', desc: 'Luyện phản xạ chia động từ bị động', link: 'https://www.google.com/search?q=bai+tap+cau+bi+dong+toeic+part+5' },
+                        { name: 'Bảng Cụm Giới Từ (In/On/At/During/Within)', desc: 'Các cụm giới từ chỉ thời gian & nơi chốn hay ra đề', link: 'https://www.google.com/search?q=gioi+tu+hay+gap+trong+toeic' }
+                    ]
+                }
+            ]
+        },
+        'w7_8': {
+            title: 'Tuần 7 - 8: So Sánh, Liên Từ & Mini Mock Test',
+            sections: [
+                {
+                    title: '📝 Đề Thi Đánh Giá Giai Đoạn 1',
+                    items: [
+                        { name: 'Đề Thi Very Easy TOEIC Mini Test', desc: 'Đề thi thử 50 câu chọn lọc kiểm tra kiến thức nền', link: 'https://study4.com/' },
+                        { name: 'Bảng Phân Biệt Liên Từ (Although) vs Giới Từ (Despite)', desc: 'Bẫy kinh điển Part 5 TOEIC', link: 'https://www.google.com/search?q=lien+tu+gioi+tu+toeic' }
+                    ]
+                }
+            ]
+        },
+        'w9_10': {
+            title: 'Tuần 9 - 10: Chiếm Trọn Điểm Part 1 & Part 5',
+            sections: [
+                {
+                    title: '📚 Sách & Flashcard 600 Từ Vựng',
+                    items: [
+                        { name: 'Sách 600 Essential Words for the TOEIC (PDF + Audio)', desc: 'Tài liệu từ vựng kinh điển cho TOEIC 650+', link: 'https://www.google.com/search?q=600+essential+words+for+the+toeic+pdf' },
+                        { name: 'Top 100 Động Từ Mô Tả Tranh Part 1', desc: 'Tổng hợp danh từ/động từ xuất hiện 90% trong đề thi', link: 'https://www.google.com/search?q=100+dong+tu+part+1+toeic' }
+                    ]
+                }
+            ]
+        },
+        'w11_12': {
+            title: 'Tuần 11 - 12: Kỹ Thuật Làm Part 2 & Bẫy Đồng Âm',
+            sections: [
+                {
+                    title: '🎯 Chiến Thuật Làm Bài',
+                    items: [
+                        { name: 'Mẹo Tránh Bẫy Đồng Âm (Same Sound Trap) Part 2', desc: 'Phương pháp loại trừ bẫy phản xạ từ lặp', link: 'https://www.youtube.com/results?search_query=meo+part+2+toeic' },
+                        { name: 'Luyện 200 Câu Part 2 Theo Dạng Hỏi Wh-Questions', desc: 'File Audio + Script phân tích kỹ', link: 'https://study4.com/' }
+                    ]
+                }
+            ]
+        },
+        'w13_15': {
+            title: 'Tuần 13 - 15: Kỹ Năng Đọc Trước Đề Part 3 & Part 6',
+            sections: [
+                {
+                    title: '🎧 Phương Pháp Skimming Part 3',
+                    items: [
+                        { name: 'Kỹ Thuật Đọc Trước Câu Hỏi Part 3 Trong 12 Giây', desc: 'Hướng dẫn quản lý thời gian Listening', link: 'https://www.youtube.com/results?search_query=ky+nhat+doc+truoc+part+3+toeic' },
+                        { name: 'Luyện Điền Câu Vào Đoạn Văn Part 6', desc: 'Bài tập tư duy logic trước và sau khoảng trống', link: 'https://www.google.com/search?q=bai+tap+part+6+toeic' }
+                    ]
+                }
+            ]
+        },
+        'w16_18': {
+            title: 'Tuần 16 - 18: Part 4 Speeches & Part 7 Scanning',
+            sections: [
+                {
+                    title: '📖 Đọc Hiểu Nhanh Part 7',
+                    items: [
+                        { name: 'Phương Pháp Scanning & Paraphrasing Part 7', desc: 'Cách tìm từ đồng nghĩa thay vì dịch từng chữ', link: 'https://www.youtube.com/results?search_query=paraphrase+part+7+toeic' },
+                        { name: 'Bộ Từ Vựng Email / Advertisement Part 7', desc: 'Các mẫu đoạn văn chuẩn TOEIC', link: 'https://www.google.com/search?q=tu+vung+doan+van+part+7+toeic' }
+                    ]
+                }
+            ]
+        },
+        'w19_20': {
+            title: 'Tuần 19 - 20: Cross-Reference Part 7 Đoạn Đôi/Ba',
+            sections: [
+                {
+                    title: '🏆 Đề Thi Thử Full Test Lần 2',
+                    items: [
+                        { name: 'Đề Thi Thử ETS TOEIC Full 200 Câu (Online)', desc: 'Làm bài và chấm điểm tự động trên Study4/Zim', link: 'https://study4.com/tests/toeic/' },
+                        { name: 'Chiến Thuật Kết Nối Thông Tin Đoạn Đôi/Ba', desc: 'Mẹo giải câu liên kết 2 văn bản', link: 'https://www.youtube.com/results?search_query=doan+doi+doan+ba+toeic' }
+                    ]
+                }
+            ]
+        },
+        'w21_24': {
+            title: 'Tuần 21 - 24: Thực Chiến Bộ Đề ETS 2023/2024',
+            sections: [
+                {
+                    title: '🔥 Bộ Đề Thi Chính Thức',
+                    items: [
+                        { name: 'Trọn Bộ ETS TOEIC 2023 (PDF + Audio)', desc: 'Đề thi sát 99% đề thi thật tại IIG', link: 'https://www.google.com/search?q=ETS+TOEIC+2023+pdf+audio' },
+                        { name: 'Trọn Bộ ETS TOEIC 2024 (PDF + Audio)', desc: 'Bộ đề mới nhất cập nhật xu hướng đề thi', link: 'https://www.google.com/search?q=ETS+TOEIC+2024+pdf+audio' }
+                    ]
+                }
+            ]
+        },
+        'w25_28': {
+            title: 'Tuần 25 - 28: Khóa Chặt Thời Gian & Hacker TOEIC',
+            sections: [
+                {
+                    title: '⚡ Luyện Tốc Độ & Đề Phức Tạp',
+                    items: [
+                        { name: 'Sách Hacker TOEIC Vol 3 Reading (PDF)', desc: 'Bộ đề nâng cao dành cho mục tiêu 800 - 900+', link: 'https://www.google.com/search?q=Hacker+TOEIC+vol+3+pdf' },
+                        { name: 'Bảng Phân Bổ Thời Gian Part 5-6-7 Chuẩn', desc: 'Quy tắc 15m - 25m - 30m', link: 'https://www.google.com/search?q=quy+tac+quan+ly+thoi+gian+toeic' }
+                    ]
+                }
+            ]
+        },
+        'w29_30': {
+            title: 'Tuần 29 - 30: Tổng Ôn Error Log & Chuẩn Bị Thi',
+            sections: [
+                {
+                    title: '🎯 Checklist Đi Thi Real Test',
+                    items: [
+                        { name: 'Quy Trình Đăng Ký & Thủ Tục Thi TOEIC tại IIG', desc: 'Những lưu ý về giấy tờ, CMT/CCCD, ảnh 3x4', link: 'https://iigvietnam.com/' },
+                        { name: 'Mẹo Giữ Tâm Lý Vững Vào Phòng Thi', desc: 'Chiến thuật tô phếu trả lời không bị nhầm câu', link: 'https://www.youtube.com/results?search_query=kinh+nghiem+di+thi+toeic' }
+                    ]
+                }
+            ]
+        }
+    };
+
+    // Modal Control Functions
+    function openResourceModal(weekKey) {
+        const data = resourceDB[weekKey];
+        if (!data) return;
+
+        document.getElementById('modalTitle').innerText = data.title;
+        const modalBody = document.getElementById('modalBody');
+        modalBody.innerHTML = '';
+
+        data.sections.forEach(sec => {
+            const secDiv = document.createElement('div');
+            secDiv.className = 'resource-section';
+            
+            let itemsHTML = '';
+            sec.items.forEach(item => {
+                itemsHTML += `
+                    <li class="resource-item">
+                        <div class="resource-info">
+                            <h5>${escapeHtml(item.name)}</h5>
+                            <p>${escapeHtml(item.desc)}</p>
+                        </div>
+                        <a href="${item.link}" target="_blank" class="resource-link">Mở Link ↗</a>
+                    </li>
+                `;
+            });
+
+            secDiv.innerHTML = `
+                <h4>${escapeHtml(sec.title)}</h4>
+                <ul class="resource-list">${itemsHTML}</ul>
+            `;
+            modalBody.appendChild(secDiv);
+        });
+
+        document.getElementById('resourceModal').classList.add('active');
+    }
+
+    function closeResourceModal(e) {
+        if (!e || e.target.id === 'resourceModal') {
+            document.getElementById('resourceModal').classList.remove('active');
+        }
+    }
+
     // System State Management
     let timerInterval = null;
-    let timerSeconds = 7200; // 2 hours
+    let timerSeconds = 7200;
 
     function calcProgress() {
         const checkboxes = document.querySelectorAll('.custom-checkbox');
@@ -742,28 +1067,27 @@
         updateTimerDisplay();
     }
 
-    // Score Calculator Formula Approx
+    // Score Calculator
     function calcScore() {
         const lcRaw = parseInt(document.getElementById('calc-lc').value) || 0;
         const rcRaw = parseInt(document.getElementById('calc-rc').value) || 0;
 
-        // Approx ETS scale conversion
         let lcScore = Math.min(495, Math.max(5, lcRaw * 4.95));
         let rcScore = Math.min(495, Math.max(5, rcRaw * 4.75));
 
-        const total = Math.round((lcScore + rcScore) / 5) * 5; // Round to nearest 5
+        const total = Math.round((lcScore + rcScore) / 5) * 5;
         document.getElementById('total-score-val').innerText = `${total} TOEIC`;
     }
 
-    // Error Log Management
+    // Error Log
     function saveLog(e) {
         e.preventDefault();
         const title = document.getElementById('log-title').value;
         const detail = document.getElementById('log-detail').value;
 
-        const logs = JSON.parse(localStorage.getItem('toeic_v2_logs') || '[]');
+        const logs = JSON.parse(localStorage.getItem('toeic_v3_logs') || '[]');
         logs.push({ id: Date.now(), title, detail });
-        localStorage.setItem('toeic_v2_logs', JSON.stringify(logs));
+        localStorage.setItem('toeic_v3_logs', JSON.stringify(logs));
 
         document.getElementById('log-title').value = '';
         document.getElementById('log-detail').value = '';
@@ -771,15 +1095,15 @@
     }
 
     function deleteLog(id) {
-        let logs = JSON.parse(localStorage.getItem('toeic_v2_logs') || '[]');
+        let logs = JSON.parse(localStorage.getItem('toeic_v3_logs') || '[]');
         logs = logs.filter(l => l.id !== id);
-        localStorage.setItem('toeic_v2_logs', JSON.stringify(logs));
+        localStorage.setItem('toeic_v3_logs', JSON.stringify(logs));
         renderLogs();
     }
 
     function renderLogs() {
         const container = document.getElementById('log-list');
-        const logs = JSON.parse(localStorage.getItem('toeic_v2_logs') || '[]');
+        const logs = JSON.parse(localStorage.getItem('toeic_v3_logs') || '[]');
         document.getElementById('logs-count').innerText = logs.length;
         
         container.innerHTML = '';
@@ -805,7 +1129,7 @@
     function exportData() {
         const data = {
             checkboxes: {},
-            logs: localStorage.getItem('toeic_v2_logs')
+            logs: localStorage.getItem('toeic_v3_logs')
         };
         document.querySelectorAll('.custom-checkbox').forEach(cb => {
             data.checkboxes[cb.id] = cb.checked;
@@ -813,7 +1137,7 @@
         const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = `TOEIC_Dashboard_Backup_${new Date().toISOString().slice(0,10)}.json`;
+        a.download = `TOEIC_V3_Backup_${new Date().toISOString().slice(0,10)}.json`;
         a.click();
     }
 
@@ -830,7 +1154,7 @@
                     });
                 }
                 if (data.logs) {
-                    localStorage.setItem('toeic_v2_logs', data.logs);
+                    localStorage.setItem('toeic_v3_logs', data.logs);
                 }
                 location.reload();
             } catch (err) {
