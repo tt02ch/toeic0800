@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lộ Trình Học TOEIC 0 - 800+</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --bg: #F9FAFB;
+            --card-bg: #FFFFFF;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --border: #E5E7EB;
+            --success: #10B981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        /* Stats Dashboard */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .stat-card h3 {
+            font-size: 13px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .stat-card .number {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: var(--card-bg);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .progress-bar-bg {
+            background: var(--border);
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-bar-fill {
+            background: var(--primary);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Main Content Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .main-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .section-card h2 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+        }
+
+        /* Checklist Styles */
+        .phase-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin: 16px 0 8px 0;
+            display: block;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .task-item label {
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .task-item.completed label {
+            text-decoration: line-through;
+            color: var(--text-light);
+        }
+
+        /* Error Log Form & List */
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        button:hover {
+            background: var(--primary-hover);
+        }
+
+        .log-item {
+            background: var(--bg);
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 8px;
+            font-size: 13px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .log-item strong {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1> Dashboard Theo Dõi Học TOEIC 0 - 800+</h1>
+        <p style="color: var(--text-light); font-size: 14px;">Lộ trình 30 tuần tự học kỷ luật và hiệu quả.</p>
+    </header>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Mục tiêu</h3>
+            <div class="number">800+ TOEIC</div>
+        </div>
+        <div class="stat-card">
+            <h3>Thời gian dự kiến</h3>
+            <div class="number">30 Tuần</div>
+        </div>
+        <div class="stat-card">
+            <h3>Đã hoàn thành</h3>
+            <div class="number" id="completed-count">0 / 30 Tuần</div>
+        </div>
+    </div>
+
+    <div class="progress-container">
+        <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 600;">
+            <span>Tiến độ tổng thể</span>
+            <span id="progress-percent">0%</span>
+        </div>
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+    </div>
+
+    <div class="main-grid">
+        <div class="section-card">
+            <h2>Lộ Trình Học Chi Tiết</h2>
+            
+            <span class="phase-title">Giai đoạn 1: Xây nền cơ bản (Target 350 - 450)</span>
+            <div class="task-item"><input type="checkbox" id="w1" onchange="updateProgress()"><label for="w1">Tuần 1-2: Bảng phát âm IPA & Từ loại cơ bản</label></div>
+            <div class="task-item"><input type="checkbox" id="w2" onchange="updateProgress()"><label for="w2">Tuần 3-4: 6 Thì cốt lõi trong TOEIC</label></div>
+            <div class="task-item"><input type="checkbox" id="w3" onchange="updateProgress()"><label for="w3">Tuần 5-6: Câu bị động & Giới từ</label></div>
+            <div class="task-item"><input type="checkbox" id="w4" onchange="updateProgress()"><label for="w4">Tuần 7-8: Câu so sánh, Liên từ & Thi thử Lần 1</label></div>
+
+            <span class="phase-title">Giai đoạn 2: Kỹ năng làm bài từng Part (Target 500 - 650)</span>
+            <div class="task-item"><input type="checkbox" id="w5" onchange="updateProgress()"><label for="w5">Tuần 9-10: Part 1 (Hình ảnh) & Part 5 (Từ loại)</label></div>
+            <div class="task-item"><input type="checkbox" id="w6" onchange="updateProgress()"><label for="w6">Tuần 11-12: Part 2 (Hỏi - Đáp) & Part 5 (Từ vựng)</label></div>
+            <div class="task-item"><input type="checkbox" id="w7" onchange="updateProgress()"><label for="w7">Tuần 13-15: Part 3 (Hội thoại) & Part 6 (Điền đoạn)</label></div>
+            <div class="task-item"><input type="checkbox" id="w8" onchange="updateProgress()"><label for="w8">Tuần 16-18: Part 4 (Bài nói) & Part 7 (Đoạn đơn)</label></div>
+            <div class="task-item"><input type="checkbox" id="w9" onchange="updateProgress()"><label for="w9">Tuần 19-20: Part 7 (Đoạn đôi/ba) & Thi thử Lần 2</label></div>
+
+            <span class="phase-title">Giai đoạn 3: Thực chiến luyện đề (Target 750 - 800+)</span>
+            <div class="task-item"><input type="checkbox" id="w10" onchange="updateProgress()"><label for="w10">Tuần 21-22: Giải đề ETS - Tối ưu Part 1, 2, 5</label></div>
+            <div class="task-item"><input type="checkbox" id="w11" onchange="updateProgress()"><label for="w11">Tuần 23-24: Giải đề ETS - Tối ưu Part 3, 4, 6</label></div>
+            <div class="task-item"><input type="checkbox" id="w12" onchange="updateProgress()"><label for="w12">Tuần 25-28: Luyện chiến thuật thời gian Part 7</label></div>
+            <div class="task-item"><input type="checkbox" id="w13" onchange="updateProgress()"><label for="w13">Tuần 29-30: Tổng ôn Sổ tay lỗi sai & Thi thật</label></div>
+        </div>
+
+        <div class="section-card">
+            <h2>Ghi Chép Lỗi Sai (Error Log)</h2>
+            <form id="error-form" onsubmit="addErrorLog(event)">
+                <div class="form-group">
+                    <label>Câu hỏi / Part</label>
+                    <input type="text" id="log-part" placeholder="VD: Part 5 - Câu 104" required>
+                </div>
+                <div class="form-group">
+                    <label>Lỗi sai & Bài học</label>
+                    <textarea id="log-note" rows="3" placeholder="VD: Nhầm giữa Adj và Adv. Sau remain dùng Adj." required></textarea>
+                </div>
+                <button type="submit">Lưu Lỗi Sai</button>
+            </form>
+
+            <div id="log-container" style="margin-top: 16px;">
+                </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Hàm cập nhật tiến độ
+    function updateProgress() {
+        const checkboxes = document.querySelectorAll('.task-item input[type="checkbox"]');
+        const total = checkboxes.length;
+        let checkedCount = 0;
+
+        checkboxes.forEach((cb) => {
+            const parent = cb.parentElement;
+            if (cb.checked) {
+                checkedCount++;
+                parent.classList.add('completed');
+            } else {
+                parent.classList.remove('completed');
+            }
+            // Lưu trạng thái checkbox vào localStorage
+            localStorage.setItem(cb.id, cb.checked);
+        });
+
+        const percent = Math.round((checkedCount / total) * 100);
+        document.getElementById('progress-percent').innerText = percent + '%';
+        document.getElementById('progress-fill').style.width = percent + '%';
+        document.getElementById('completed-count').innerText = `${checkedCount} / ${total} Mục`;
+    }
+
+    // Hàm thêm lỗi sai
+    function addErrorLog(event) {
+        event.preventDefault();
+        const part = document.getElementById('log-part').value;
+        const note = document.getElementById('log-note').value;
+
+        const logs = JSON.parse(localStorage.getItem('toeic_error_logs') || '[]');
+        logs.push({ part, note });
+        localStorage.setItem('toeic_error_logs', JSON.stringify(logs));
+
+        document.getElementById('log-part').value = '';
+        document.getElementById('log-note').value = '';
+        renderLogs();
+    }
+
+    // Hàm hiển thị danh sách lỗi sai
+    function renderLogs() {
+        const container = document.getElementById('log-container');
+        const logs = JSON.parse(localStorage.getItem('toeic_error_logs') || '[]');
+        container.innerHTML = '';
+
+        logs.reverse().forEach((item) => {
+            const div = document.createElement('div');
+            div.className = 'log-item';
+            div.innerHTML = `<strong>${escapeHtml(item.part)}</strong>: ${escapeHtml(item.note)}`;
+            container.appendChild(div);
+        });
+    }
+
+    // Tránh lỗi XSS cơ bản
+    function escapeHtml(text) {
+        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // Khởi tạo trạng thái khi tải lại trang
+    window.onload = function() {
+        const checkboxes = document.querySelectorAll('.task-item input[type="checkbox"]');
+        checkboxes.forEach((cb) => {
+            const savedState = localStorage.getItem(cb.id);
+            if (savedState === 'true') {
+                cb.checked = true;
+            }
+        });
+        updateProgress();
+        renderLogs();
+    };
+</script>
+
+</body>
+</html>
